@@ -8,8 +8,6 @@ Gosto de explorar novas tecnologias e transformar ideias em produtos reais, func
 
 ---
 
-## 🧠 Tech Stack
-
 ### 💻 Linguagens
 <p>
   <img src="https://raw.githubusercontent.com/github/explore/master/topics/java/java.png" width="45px" title="Java"/>
