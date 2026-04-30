@@ -40,7 +40,7 @@ Gosto de explorar novas tecnologias e transformar ideias em produtos reais, func
 
 ## 📫 Contato
 <p>
-  <a href="https://instagram.com/SEU_USUARIO" target="_blank">
+  <a href="https://instagram.com/lucena_daniell" target="_blank">
     <img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white">
   </a>
 </p>
