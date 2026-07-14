@@ -139,7 +139,17 @@ text, tspan { white-space: pre; }
         dur="8s"
         repeatCount="indefinite"/>
 </rect>
-  
+
+<tspan x="-10" y="-30">
+    .:  .::::.
+    <animate
+        attributeName="opacity"
+        values="1;0.15;1"
+        dur="0.18s"
+        begin="0.12s"
+        repeatCount="indefinite"/>
+</tspan>
+    
 </svg>
 
 
