@@ -108,7 +108,7 @@ text, tspan { white-space: pre; }
 <animate
     attributeName="opacity"
     values="1;0.6;1;0.4;1"
-    dur="1.2s"
+    dur="2.2s"
     repeatCount="indefinite"/>
 <tspan x="520" y="30" fill="#00f0ff" fontsize="17px">Daniel Lucena</tspan> -———————————————————————————————————————————-—-
 <tspan x="520" y="70" class="cc">. </tspan><tspan class="key">Função</tspan><tspan class="cc"> .......... </tspan><tspan class="value">Software &amp; developer</tspan>
