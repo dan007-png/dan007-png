@@ -122,7 +122,7 @@ text, tspan { white-space: pre; }
 <tspan x="520" y="270" class="cc">. </tspan>
 <tspan x="520" y="290" fill="#ff007f">- Contact</tspan> -—————————————————————————————————————-—-
 <tspan x="520" y="310" class="cc">. </tspan><tspan class="key">E-mail</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">lutechdan@gmail.com</tspan>
-<tspan x="520" y="420" class="cc">. </tspan><tspan class="key">Telefone</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">(83)9623-6337</tspan>
+<tspan x="520" y="340" class="cc">. </tspan><tspan class="key">Telefone</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">(83)9623-6337</tspan>
 </text>
 
 <rect
