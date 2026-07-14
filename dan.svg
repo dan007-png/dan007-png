@@ -31,20 +31,7 @@ text, tspan { white-space: pre; }
 <rect width="1180px" height="530px" fill="#0a0b10" rx="15" stroke="rgba(0, 240, 255, 0.15)" stroke-width="2"/>
 <g transform="translate(22,20) scale(0.42,0.88)">
 <text x="0" y="0" fill="#00f0ff" class="ascii">
-<tspan x="-10" y="-30" <animate
-        attributeName="opacity"
-        values="1;0.15;1"
-        dur="0.18s"
-        begin="3.17s"
-        repeatCount="indefinite"/>
-
-    <animate
-        attributeName="fill"
-        values="#00f0ff;#39ff14;#00f0ff"
-        dur="0.18s"
-        begin="3.17s"
-        repeatCount="indefinite"/>
-    >                                                        .:  .::::.                                                             </tspan>
+<tspan x="-10" y="-30">                                                 .:  .::::.                                                             </tspan>
 <tspan x="-10" y="-21">                                                  .   .       .   ...-                                                         </tspan>
 <tspan x="-10" y="-12">                                               :. .::                .:                                                        </tspan>
 <tspan x="-10" y="-3">                                              :  -                                                                             </tspan>
