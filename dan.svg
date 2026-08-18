@@ -3,9 +3,8 @@
 <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1180"
-    height="620"
-    viewBox="0 0 1180 620"
-    preserveAspectRatio="xMidYMid meet"
+    height="560"
+    viewBox="0 0 1180 560"
     font-family="Consolas, 'Courier New', monospace"
 >
 
@@ -15,86 +14,37 @@
 
     <defs>
 
-        <!-- =====================================================
-             BACKGROUND
-             ===================================================== -->
-
-        <radialGradient id="bgGradient" cx="50%" cy="42%" r="75%">
-
-            <stop
-                offset="0%"
-                stop-color="#0b2026"
-            />
-
-            <stop
-                offset="38%"
-                stop-color="#071218"
-            />
-
-            <stop
-                offset="72%"
-                stop-color="#05080d"
-            />
-
-            <stop
-                offset="100%"
-                stop-color="#020409"
-            />
-
+        <!-- Background -->
+        <radialGradient
+            id="bg"
+            cx="50%"
+            cy="45%"
+            r="75%"
+        >
+            <stop offset="0%" stop-color="#0a1720"/>
+            <stop offset="45%" stop-color="#050b11"/>
+            <stop offset="100%" stop-color="#020408"/>
         </radialGradient>
 
 
-        <!-- =====================================================
-             BORDER
-             ===================================================== -->
-
+        <!-- Border -->
         <linearGradient
-            id="borderGradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
+            id="border"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="1"
         >
-
-            <stop
-                offset="0%"
-                stop-color="#00f0ff"
-                stop-opacity="0.65"
-            />
-
-            <stop
-                offset="25%"
-                stop-color="#00f0ff"
-                stop-opacity="0.08"
-            />
-
-            <stop
-                offset="50%"
-                stop-color="#ffffff"
-                stop-opacity="0.03"
-            />
-
-            <stop
-                offset="75%"
-                stop-color="#ff007f"
-                stop-opacity="0.08"
-            />
-
-            <stop
-                offset="100%"
-                stop-color="#00f0ff"
-                stop-opacity="0.5"
-            />
-
+            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.65"/>
+            <stop offset="35%" stop-color="#00f0ff" stop-opacity="0.08"/>
+            <stop offset="70%" stop-color="#ff007f" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.45"/>
         </linearGradient>
 
 
-        <!-- =====================================================
-             ASCII GLOW
-             ===================================================== -->
-
+        <!-- Cyan hologram -->
         <filter
-            id="asciiGlow"
+            id="hologram"
             x="-40%"
             y="-40%"
             width="180%"
@@ -104,50 +54,37 @@
             <feGaussianBlur
                 in="SourceGraphic"
                 stdDeviation="1.4"
-                result="blurSmall"
+                result="blur1"
             />
 
             <feGaussianBlur
                 in="SourceGraphic"
-                stdDeviation="5"
-                result="blurLarge"
+                stdDeviation="4"
+                result="blur2"
             />
 
             <feColorMatrix
-                in="blurLarge"
+                in="blur2"
                 type="matrix"
                 values="
                     0 0 0 0 0
-                    0 0 0 0 0.75
+                    0 0 0 0 0.85
                     0 0 0 0 1
-                    0 0 0 0.8 0
+                    0 0 0 0.65 0
                 "
                 result="cyanGlow"
             />
 
             <feMerge>
-
-                <feMergeNode
-                    in="blurSmall"
-                />
-
-                <feMergeNode
-                    in="cyanGlow"
-                />
-
-                <feMergeNode
-                    in="SourceGraphic"
-                />
-
+                <feMergeNode in="blur1"/>
+                <feMergeNode in="cyanGlow"/>
+                <feMergeNode in="SourceGraphic"/>
             </feMerge>
 
         </filter>
 
 
-        <!-- =====================================================
-             TEXT GLOW
-             ===================================================== -->
-
+        <!-- Small text glow -->
         <filter
             id="textGlow"
             x="-30%"
@@ -163,62 +100,37 @@
             />
 
             <feMerge>
-
-                <feMergeNode
-                    in="blur"
-                />
-
-                <feMergeNode
-                    in="SourceGraphic"
-                />
-
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
             </feMerge>
 
         </filter>
 
 
-        <!-- =====================================================
-             PARTICLE GLOW
-             ===================================================== -->
-
-        <filter
-            id="particleGlow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="300%"
-        >
+        <!-- Particle glow -->
+        <filter id="particleGlow">
 
             <feGaussianBlur
+                in="SourceGraphic"
                 stdDeviation="1.5"
                 result="blur"
             />
 
             <feMerge>
-
-                <feMergeNode
-                    in="blur"
-                />
-
-                <feMergeNode
-                    in="SourceGraphic"
-                />
-
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
             </feMerge>
 
         </filter>
 
 
-        <!-- =====================================================
-             SCANLINE
-             ===================================================== -->
-
+        <!-- Scanline gradient -->
         <linearGradient
-            id="scanGradient"
-            x1="0%"
-            y1="0%"
-            x2="0%"
-            y2="100%"
+            id="scan"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
         >
 
             <stop
@@ -228,21 +140,21 @@
             />
 
             <stop
-                offset="42%"
+                offset="45%"
                 stop-color="#00f0ff"
-                stop-opacity="0.01"
+                stop-opacity="0.02"
             />
 
             <stop
                 offset="50%"
                 stop-color="#00f0ff"
-                stop-opacity="0.18"
+                stop-opacity="0.20"
             />
 
             <stop
-                offset="58%"
+                offset="55%"
                 stop-color="#00f0ff"
-                stop-opacity="0.01"
+                stop-opacity="0.02"
             />
 
             <stop
@@ -254,54 +166,53 @@
         </linearGradient>
 
 
-        <!-- =====================================================
-             OVERLAY PANEL
-             ===================================================== -->
-
+        <!-- ASCII mask -->
         <linearGradient
-            id="panelGradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
+            id="asciiFade"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="0"
         >
 
-            <stop
-                offset="0%"
-                stop-color="#03080d"
-                stop-opacity="0.91"
-            />
-
-            <stop
-                offset="50%"
-                stop-color="#071016"
-                stop-opacity="0.84"
-            />
-
-            <stop
-                offset="100%"
-                stop-color="#02060a"
-                stop-opacity="0.91"
-            />
+            <stop offset="0%" stop-color="white" stop-opacity="0.25"/>
+            <stop offset="55%" stop-color="white" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="white" stop-opacity="0.05"/>
 
         </linearGradient>
 
 
-        <!-- =====================================================
-             ASCII CLIP
-             ===================================================== -->
-
-        <clipPath id="asciiClip">
+        <mask id="asciiMask">
 
             <rect
-                x="95"
-                y="70"
-                width="990"
-                height="500"
-                rx="16"
+                x="0"
+                y="0"
+                width="1180"
+                height="560"
+                fill="url(#asciiFade)"
             />
 
-        </clipPath>
+        </mask>
+
+
+        <!-- Horizontal scanlines -->
+        <pattern
+            id="scanlines"
+            width="100%"
+            height="6"
+            patternUnits="userSpaceOnUse"
+        >
+
+            <rect
+                x="0"
+                y="0"
+                width="100%"
+                height="1"
+                fill="#00f0ff"
+                opacity="0.035"
+            />
+
+        </pattern>
 
 
         <!-- =====================================================
@@ -312,39 +223,54 @@
 
             .ascii {
                 fill: #00f0ff;
+                font-size: 8px;
                 font-family: Consolas, "Courier New", monospace;
-                font-size: 15px;
                 letter-spacing: 0;
             }
 
-            .key {
-                fill: #5EEAD4;
-                font-weight: 600;
+            .name {
+                fill: #00f0ff;
+                font-size: 21px;
+                font-weight: bold;
+            }
+
+            .subtitle {
+                fill: #526273;
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+
+            .label {
+                fill: #5eead4;
+                font-size: 11px;
+                font-weight: bold;
             }
 
             .value {
-                fill: #E5E7EB;
+                fill: #e5e7eb;
+                font-size: 11px;
+            }
+
+            .skill {
+                fill: #cbd5e1;
+                font-size: 10px;
             }
 
             .muted {
                 fill: #475569;
+                font-size: 10px;
             }
 
             .cyan {
-                fill: #00F0FF;
+                fill: #00f0ff;
             }
 
             .pink {
-                fill: #FF007F;
+                fill: #ff007f;
             }
 
             .green {
-                fill: #39FF14;
-            }
-
-            .category {
-                fill: #5EEAD4;
-                font-weight: 600;
+                fill: #39ff14;
             }
 
             text,
@@ -358,40 +284,39 @@
 
 
     <!-- =========================================================
-         MAIN TERMINAL
+         TERMINAL BACKGROUND
          ========================================================= -->
 
     <rect
         x="0"
         y="0"
         width="1180"
-        height="620"
-        rx="20"
-        fill="#020409"
+        height="560"
+        rx="18"
+        fill="#020408"
     />
 
     <rect
-        x="2"
-        y="2"
-        width="1176"
-        height="616"
-        rx="18"
-        fill="url(#bgGradient)"
-        stroke="url(#borderGradient)"
+        x="1"
+        y="1"
+        width="1178"
+        height="558"
+        rx="17"
+        fill="url(#bg)"
+        stroke="url(#border)"
         stroke-width="1.5"
     />
-
 
     <!-- Inner border -->
 
     <rect
-        x="10"
-        y="10"
-        width="1160"
-        height="600"
-        rx="15"
+        x="9"
+        y="9"
+        width="1162"
+        height="542"
+        rx="13"
         fill="none"
-        stroke="#00F0FF"
+        stroke="#00f0ff"
         stroke-width="1"
         opacity="0.035"
     />
@@ -403,58 +328,38 @@
 
     <g>
 
-        <!-- traffic lights -->
-
-        <circle
-            cx="32"
-            cy="32"
-            r="4"
-            fill="#ff4444"
-            opacity="0.75"
-        />
-
-        <circle
-            cx="47"
-            cy="32"
-            r="4"
-            fill="#ffd166"
-            opacity="0.75"
-        />
-
-        <circle
-            cx="62"
-            cy="32"
-            r="4"
+        <rect
+            x="22"
+            y="20"
+            width="6"
+            height="6"
+            rx="1"
             fill="#39ff14"
-            opacity="0.75"
         >
             <animate
                 attributeName="opacity"
-                values="0.8;0.3;0.8"
+                values="1;0.3;1;0.7;1"
                 dur="2.4s"
                 repeatCount="indefinite"
             />
-        </circle>
+        </rect>
 
 
         <text
-            x="82"
-            y="36"
-            fill="#475569"
-            font-size="10"
-            letter-spacing="2"
+            x="36"
+            y="26"
+            class="subtitle"
         >
-            DANIEL_LUCENA // SYSTEM_PROFILE
+            SYSTEM_PROFILE // ONLINE
         </text>
 
 
         <text
-            x="1145"
-            y="36"
+            x="1150"
+            y="26"
             text-anchor="end"
-            fill="#334155"
-            font-size="9"
-            letter-spacing="1"
+            class="subtitle"
+            font-size="8"
         >
             0xD4N13L
         </text>
@@ -464,197 +369,807 @@
 
     <!-- =========================================================
          ASCII BACKGROUND
+         
+         O ASCII fica ATRÁS das informações.
          ========================================================= -->
 
     <g
         id="ascii-background"
-        clip-path="url(#asciiClip)"
+        transform="translate(55 65) scale(0.72)"
+        opacity="0.22"
+        filter="url(#hologram)"
+        mask="url(#asciiMask)"
     >
 
-        <!-- =====================================================
-             ASCII PRINCIPAL
-             ===================================================== -->
-
-        <g
-            transform="translate(285 112) scale(0.55)"
-            opacity="0.34"
-            filter="url(#asciiGlow)"
+        <text
+            class="ascii"
+            x="0"
+            y="0"
         >
 
-            <text
-                class="ascii"
-                x="0"
-                y="0"
-            >
+            <tspan x="-10" y="0">
+                                                 .:  .::::.
+            </tspan>
 
-                <tspan x="-10" y="-30">                                                 .:  .::::.                                                             </tspan>
-                <tspan x="-10" y="-21">                                                  .   .       .   ...-                                                         </tspan>
-                <tspan x="-10" y="-12">                                               :. .::                .:                                                        </tspan>
-                <tspan x="-10" y="-3">                                              :  -                                                                             </tspan>
-                <tspan x="-10" y="6">                                             :.::..         .                                                                  </tspan>
-                <tspan x="-10" y="15">                                            -.:. :      ..                                                                     </tspan>
-                <tspan x="-10" y="24">                                           --...:.   .            .. ..:...                                                    </tspan>
-                <tspan x="-10" y="33">                                          -=.-----:.-::.. .::-+==+***+====---.                                                 </tspan>
-                <tspan x="-10" y="42">                                         --:-# +**##%####+*+*%%%%%%%%#**+=====:                                                </tspan>
-                <tspan x="-10" y="51">                                         ==-%%*%@@@@@@%@@@@@@@@%%%%%%##*+==-=--:                                               </tspan>
-                <tspan x="-10" y="60">                                        :--%@@%@@@@@@@@@@@@@@@@%%%%%%##*+==-----:                                              </tspan>
-                <tspan x="-10" y="69">                                        .=#@@@@@@@@@@@@@@@@@@@@%%%%%%##*+=-------                                              </tspan>
-                <tspan x="-10" y="78">                                        .+@@@@@@@@@@@@@@@@@@@@%%%%%%%##*+=-------:                                             </tspan>
-                <tspan x="-10" y="87">                                       .:+@@@@@@@@@@@@@@@@@@@@%%%%%%###*+==-=----:.                                            </tspan>
-                <tspan x="-10" y="96">                                       .-*%@@@@@@@@@@@@@@@@@@@@%%%%%%##*+====----:.                                            </tspan>
-                <tspan x="-10" y="105">                                       :+#%@@@@@@@@@@@@@@@@@@@@@@@@%%##*++==--:::-:                                            </tspan>
-                <tspan x="-10" y="114">                                       -+#%@@@@@@@@@@@@@@@@@@@@@@@%%###*+++=-::::-:.                                           </tspan>
-                <tspan x="-10" y="123">                                       :=*%@@@@@@@@@@@@@@@@@@@@@@%%%%##****+=-:::--:                                           </tspan>
-                <tspan x="-10" y="132">                                        -+%@@@@@@@@%*#*#%@@@@@%%%##=:      :.:-::--:                                           </tspan>
-                <tspan x="-10" y="141">                                        -*@@@@*+=.    -=#%%%%%##*+=.     .:..  .---:                                           </tspan>
-                <tspan x="-10" y="150">                                        =*@@%*#%%#*+-..:-*#%@%%*=:      :: ..:..:--.                                           </tspan>
-                <tspan x="-10" y="159">                                        +*%@%%#*=: :    .-*@@@%*:     +=      ..:--.                                           </tspan>
-                <tspan x="-10" y="168">                                         #%@@%*-:%-   -.+%%@@@@#:    .#+  ..    .--:    .-                                     </tspan>
-                <tspan x="-10" y="177">                                     %@@%#%@@%#####*+--=*%%@@@@#:.  .:---........:-- :... .                                    </tspan>
-                <tspan x="-10" y="186">                                     :-%@@%@@@@@%%###***#@@@@@%#::.---=====----:.:--....:                                      </tspan>
-                <tspan x="-10" y="195">                                     +%@@@@@@@@@@@@@%%@@@@@@@@@#=::-=+*+++*+++=-::--..:.:.                                     </tspan>
-                <tspan x="-10" y="204">                                     *@@@#@@@@@@@@@@@@@@@@@@@@%%#=:-=+****+=++=-:---:  .: .                                    </tspan>
-                <tspan x="-10" y="213">                                     @%@%*@@@@@@@@@@@@@@@@@@@@@#*=-.:==+*+++=---:-=--   :.                                     </tspan>
-                <tspan x="-10" y="222">                                      %@##@@@@@@@@@@@@@@@@@@@%#*----.:=++++=--::--=.-   :.                                     </tspan>
-                <tspan x="-10" y="231">                                      @%%#@%@@@@@@@@@@@@@%--#+=.  ::..-=++=--:-::-:   ...                                      </tspan>
-                <tspan x="-10" y="240">                                       %%@@+@@@@@@@@@@@@@*:##+:   ....-=++=-:::---  :-..                                       </tspan>
-                <tspan x="-10" y="249">                                        @@@+@@@@@@@@@@@@@%%+###*. ..:-=+=+==:-:--- ::::                                        </tspan>
-                <tspan x="-10" y="258">                                         @@%#@@@@@@@@@@@@%++==*=-  .:=+====--::-:.  .                                          </tspan>
-                <tspan x="-10" y="267">                                            =%@@@@@@@@%#=--=-.++.    .-===---::..                                              </tspan>
-                <tspan x="-10" y="276">                                            :#%@@@@%****+**++#*-.:-: -  .:::::...                                              </tspan>
-                <tspan x="-10" y="285">                                            .+##@@@+-++#=-==:-..          ::.   .                                              </tspan>
-                <tspan x="-10" y="294">                                             :**#@%**= .=*****++=-.    :: ..                                                   </tspan>
-                <tspan x="-10" y="303">                                              +*-*%**%@%#*****+=......:-::.                                                    </tspan>
-                <tspan x="-10" y="312">                                               +:-+%#@@@%%%*=-....:..:::::                                                     </tspan>
-                <tspan x="-10" y="321">                                                ::+%%%%%%##+=:..-.:.......      :                                              </tspan>
-                <tspan x="-10" y="330">                                                 :##+*#%%%%%#+--==-:.::.       .:                                              </tspan>
-                <tspan x="-10" y="339">                                                #..---%%@@@@@@##**==-:.       ..:                                              </tspan>
-                <tspan x="-10" y="348">                                                %%.   +*%%#%%%##+==-..        ..::                                             </tspan>
-                <tspan x="-10" y="357">                                                 @%.  :-:==+++=+--.          ....:                                             </tspan>
-                <tspan x="-10" y="366">                                                 %%#=     ..:               . ...:                                             </tspan>
-                <tspan x="-10" y="375">                                                 %%@@#                          .: .                                           </tspan>
-                <tspan x="-10" y="384">                                                 %%@@@%-                        .  ..                                          </tspan>
-                <tspan x="-10" y="393">                                                +%@@@%@%%%%#-                                                                  </tspan>
-                <tspan x="-10" y="402">                                                ++%@@%@%%%%%%+=-:.                                                             </tspan>
-                <tspan x="-10" y="411">                                                + %%%@%%%%%%%#+=:.                                                             </tspan>
-                <tspan x="-10" y="420">                                                + :%%%%@%%%###*-..      .                                                      </tspan>
-                <tspan x="-10" y="429">                                               -*= -#%%%@%%%#*=::..    ...                                                     </tspan>
-                <tspan x="-10" y="438">                                               -##. -%%@%%%%##+*+--.  .::                                                      </tspan>
-                <tspan x="-10" y="447">                                               -##-  -%%%%%%%%#***=:  :-:.::                                                   </tspan>
-                <tspan x="-10" y="456">                                                +*=   :*%%%%%##*+=-  :--.+-.                                                   </tspan>
-                <tspan x="-10" y="465">                                                *+=+   .*####*++--:-:-=::::                                                    </tspan>
-                <tspan x="-10" y="474">                                                #+   -  .+****+++=--=-                                                         </tspan>
-                <tspan x="-10" y="483">                                                +    :=  .--=++++===      .                                                    </tspan>
-                <tspan x="-10" y="492">                                                =          ..::-==-       .                                                    </tspan>
-                <tspan x="-10" y="501">                                                +       :    .:-=+                                                             </tspan>
-                <tspan x="-10" y="510">                                                =     +=      -=+-                                                             </tspan>
-                <tspan x="-10" y="519">                                                    .--+-     :=*    .     .                                                   </tspan>
-                <tspan x="-10" y="528">                                                 -. -=+-+     .-**:+.     :=                                                   </tspan>
-                <tspan x="-10" y="537">                                                 :..-+#:=  .   .+*:       -                                                    </tspan>
-                <tspan x="-10" y="546">                                                 :+:=++* .     .+#      .-                                                     </tspan>
-                <tspan x="-10" y="555">                                                  +=-+=.+:.   . ++     .=:                                                     </tspan>
-                <tspan x="-10" y="564">                                                  *-=---=+.    #       +*                                                      </tspan>
-                <tspan x="-10" y="573">                                                  *:-+:==+ .  -       .+                                                       </tspan>
-                <tspan x="-10" y="582">                                                  *: +#+=-..:      ::=-.                                                       </tspan>
-                <tspan x="-10" y="591">                                                  =-:-*+:=-       -+*#-                                                        </tspan>
-                <tspan x="-10" y="600">                                                  : --+=:      --. -+*                                                         </tspan>
+            <tspan x="-10" y="9">
+                                                  .   .       .   ...-
+            </tspan>
 
-            </text>
+            <tspan x="-10" y="18">
+                                               :. .::                .:
+            </tspan>
 
-        </g>
+            <tspan x="-10" y="27">
+                                              :  -
+            </tspan>
 
+            <tspan x="-10" y="36">
+                                             :.::..         .
+            </tspan>
 
-        <!-- =====================================================
-             RGB GHOST
-             ===================================================== -->
+            <tspan x="-10" y="45">
+                                            -.:. :      ..
+            </tspan>
 
-        <g
-            transform="translate(289 112) scale(0.55)"
-            opacity="0.055"
-            fill="#FF007F"
-        >
+            <tspan x="-10" y="54">
+                                           --...:.   .            .. ..:... 
+            </tspan>
 
-            <text
-                class="ascii"
-                x="3"
-                y="0"
-            >
+            <tspan x="-10" y="63">
+                                          -=.-----:.-::.. .::-+==+***+====---.
+            </tspan>
 
-                <tspan x="-10" y="42">                                         --:-# +**##%####+*+*%%%%%%%%#**+=====: </tspan>
-                <tspan x="-10" y="51">                                         ==-%%*%@@@@@@%@@@@@@@@%%%%%%##*+==-=--: </tspan>
-                <tspan x="-10" y="60">                                        :--%@@%@@@@@@@@@@@@@@@@%%%%%%##*+==-----: </tspan>
-                <tspan x="-10" y="69">                                        .=#@@@@@@@@@@@@@@@@@@@@%%%%%%##*+=------- </tspan>
-                <tspan x="-10" y="78">                                        .+@@@@@@@@@@@@@@@@@@@@%%%%%%%##*+=-------: </tspan>
-                <tspan x="-10" y="87">                                       .:+@@@@@@@@@@@@@@@@@@@@%%%%%%###*+==-=----:. </tspan>
-                <tspan x="-10" y="96">                                       .-*%@@@@@@@@@@@@@@@@@@@@%%%%%%##*+====----:. </tspan>
+            <tspan x="-10" y="72">
+                                         --:-# +**##%####+*+*%%%%%%%%#**+=====:
+            </tspan>
 
-            </text>
+            <tspan x="-10" y="81">
+                                         ==-%%*%@@@@@@%@@@@@@@@%%%%%%##*+==-=--:
+            </tspan>
 
-            <animate
-                attributeName="opacity"
-                values="0.02;0.02;0.07;0.025;0.055;0.02"
-                dur="4.5s"
-                repeatCount="indefinite"
-            />
+            <tspan x="-10" y="90">
+                                        :--%@@%@@@@@@@@@@@@@@@@%%%%%%##*+==-----:
+            </tspan>
 
-        </g>
+            <tspan x="-10" y="99">
+                                        .=#@@@@@@@@@@@@@@@@@@@@%%%%%%##*+=-------
+            </tspan>
 
+            <tspan x="-10" y="108">
+                                        .+@@@@@@@@@@@@@@@@@@@@%%%%%%%##*+=-------
+            </tspan>
 
-        <!-- Cyan ghost -->
+            <tspan x="-10" y="117">
+                                       .:+@@@@@@@@@@@@@@@@@@@@%%%%%%###*+==-=----:.
+            </tspan>
 
-        <g
-            transform="translate(281 112) scale(0.55)"
-            opacity="0.04"
-            fill="#39FF14"
-        >
+            <tspan x="-10" y="126">
+                                       .-*%@@@@@@@@@@@@@@@@@@@@%%%%%%##*+====----:.
+            </tspan>
 
-            <text
-                class="ascii"
-                x="-3"
-                y="0"
-            >
+            <tspan x="-10" y="135">
+                                       :+#%@@@@@@@@@@@@@@@@@@@@@@@@%%##*++==--:::-:
+            </tspan>
 
-                <tspan x="-10" y="177">
-                    %@@%#%@@%#####*+--=*%%@@@@#:.  .:---........:-- :...
-                </tspan>
+            <tspan x="-10" y="144">
+                                       -+#%@@@@@@@@@@@@@@@@@@@@@@@%%###*+++=-::::-:.
+            </tspan>
 
-                <tspan x="-10" y="186">
-                    :-%@@%@@@@@%%###***#@@@@@%#::.---=====----:.:--....
-                </tspan>
+            <tspan x="-10" y="153">
+                                       :=*%@@@@@@@@@@@@@@@@@@@@@@%%%%##****+=-:::--:
+            </tspan>
 
-                <tspan x="-10" y="195">
-                    +%@@@@@@@@@@@@@%%@@@@@@@@@#=::-=+*+++*+++=-::--...
-                </tspan>
+            <tspan x="-10" y="162">
+                                        -+%@@@@@@@@%*#*#%@@@@@%%%##=:      :.:-::--:
+            </tspan>
 
-            </text>
+            <tspan x="-10" y="171">
+                                        -*@@@@*+=.    -=#%%%%%##*+=.     .:..  .---:
+            </tspan>
 
-        </g>
+            <tspan x="-10" y="180">
+                                        =*@@%*#%%#*+-..:-*#%@%%*=:      :: ..:..:--.
+            </tspan>
+
+            <tspan x="-10" y="189">
+                                        +*%@%%#*=: :    .-*@@@%*:     +=      ..:--.
+            </tspan>
+
+            <tspan x="-10" y="198">
+                                         #%@@%*-:%-   -.+%%@@@@#:    .#+  ..    .--:
+            </tspan>
+
+            <tspan x="-10" y="207">
+                                     %@@%#%@@%#####*+--=*%%@@@@#:.  .:---........:--
+            </tspan>
+
+            <tspan x="-10" y="216">
+                                     :-%@@%@@@@@%%###***#@@@@@%#::.---=====----:.:--
+            </tspan>
+
+            <tspan x="-10" y="225">
+                                     +%@@@@@@@@@@@@@%%@@@@@@@@@#=::-=+*+++*+++=-::--
+            </tspan>
+
+            <tspan x="-10" y="234">
+                                     *@@@#@@@@@@@@@@@@@@@@@@@@%%#=:-=+****+=++=-:---
+            </tspan>
+
+            <tspan x="-10" y="243">
+                                     @%@%*@@@@@@@@@@@@@@@@@@@@@#*=-.:==+*+++=---:-=--
+            </tspan>
+
+            <tspan x="-10" y="252">
+                                      %@##@@@@@@@@@@@@@@@@@@@%#*----.:=++++=--::--=.- 
+            </tspan>
+
+            <tspan x="-10" y="261">
+                                      @%%#@%@@@@@@@@@@@@@%--#+=.  ::..-=++=--:-::-:
+            </tspan>
+
+            <tspan x="-10" y="270">
+                                      %%@@+@@@@@@@@@@@@@*:##+:   ....-=++=-:::--- 
+            </tspan>
+
+            <tspan x="-10" y="279">
+                                       @@@+@@@@@@@@@@@@@%%+###*. ..:-=+=+==:-:--- 
+            </tspan>
+
+            <tspan x="-10" y="288">
+                                        @@%#@@@@@@@@@@@@%++==*=-  .:=+====--::-:.
+            </tspan>
+
+            <tspan x="-10" y="297">
+                                           =%@@@@@@@@%#=--=-.++.    .-===---::..
+            </tspan>
+
+            <tspan x="-10" y="306">
+                                           :#%@@@@%****+**++#*-.:-: -  .:::::...
+            </tspan>
+
+            <tspan x="-10" y="315">
+                                           .+##@@@+-++#=-==:-..          ::.
+            </tspan>
+
+            <tspan x="-10" y="324">
+                                            :**#@%**= .=*****++=-.    :: ..
+            </tspan>
+
+            <tspan x="-10" y="333">
+                                             +*-*%**%@%#*****+=......:-::.
+            </tspan>
+
+            <tspan x="-10" y="342">
+                                              +:-+%#@@@%%%*=-....:..:::::
+            </tspan>
+
+            <tspan x="-10" y="351">
+                                               +:-+%#@@@%%%*=-....:..:::::
+            </tspan>
+
+            <tspan x="-10" y="360">
+                                                ::+%%%%%%##+=:..-.:.......
+            </tspan>
+
+            <tspan x="-10" y="369">
+                                                 :##+*#%%%%%#+--==-:.::.
+            </tspan>
+
+            <tspan x="-10" y="378">
+                                                #..---%%@@@@@@##**==-:.
+            </tspan>
+
+            <tspan x="-10" y="387">
+                                                %%.   +*%%#%%%##+==-..
+            </tspan>
+
+            <tspan x="-10" y="396">
+                                                 @%.  :-:==+++=+--.
+            </tspan>
+
+            <tspan x="-10" y="405">
+                                                 %%#=     ..:
+            </tspan>
+
+            <tspan x="-10" y="414">
+                                                 %%@@#
+            </tspan>
+
+            <tspan x="-10" y="423">
+                                                 %%@@@%-
+            </tspan>
+
+            <tspan x="-10" y="432">
+                                                +%@@@%@%%%%#-
+            </tspan>
+
+            <tspan x="-10" y="441">
+                                                ++%@@%@%%%%%%+=-:.
+            </tspan>
+
+            <tspan x="-10" y="450">
+                                                + %%%@%%%%%%%#+=:.
+            </tspan>
+
+            <tspan x="-10" y="459">
+                                                + :%%%%@%%%###*-..
+            </tspan>
+
+            <tspan x="-10" y="468">
+                                               -*= -#%%%@%%%#*=::..
+            </tspan>
+
+            <tspan x="-10" y="477">
+                                               -##. -%%@%%%%##+*+--.
+            </tspan>
+
+            <tspan x="-10" y="486">
+                                               -##-  -%%%%%%%%#***=:
+            </tspan>
+
+            <tspan x="-10" y="495">
+                                                +*=   :*%%%%%##*+=-
+            </tspan>
+
+            <tspan x="-10" y="504">
+                                                *+=+   .*####*++--:
+            </tspan>
+
+            <tspan x="-10" y="513">
+                                                #+   -  .+****+++=-
+            </tspan>
+
+            <tspan x="-10" y="522">
+                                                +    :=  .--=++++===
+            </tspan>
+
+            <tspan x="-10" y="531">
+                                                =          ..::-==-
+            </tspan>
+
+            <tspan x="-10" y="540">
+                                                +       :    .:-=+
+            </tspan>
+
+            <tspan x="-10" y="549">
+                                                =     +=      -=+-
+            </tspan>
+
+            <tspan x="-10" y="558">
+                                                    .--+-     :=*
+            </tspan>
+
+            <tspan x="-10" y="567">
+                                                 -. -=+-+     .-**:+.
+            </tspan>
+
+            <tspan x="-10" y="576">
+                                                 :..-+#:=  .   .+*:
+            </tspan>
+
+            <tspan x="-10" y="585">
+                                                 :+:=++* .     .+#
+            </tspan>
+
+            <tspan x="-10" y="594">
+                                                  +=-+=.+:.   . ++
+            </tspan>
+
+            <tspan x="-10" y="603">
+                                                  *-=---=+.    #
+            </tspan>
+
+        </text>
 
     </g>
 
 
     <!-- =========================================================
-         ASCII SCANLINES
+         ASCII RGB GHOST
          ========================================================= -->
 
     <g
-        clip-path="url(#asciiClip)"
-        opacity="0.15"
+        transform="translate(57 65) scale(0.72)"
+        opacity="0.035"
+    >
+
+        <text
+            class="ascii"
+            x="3"
+            y="0"
+            fill="#ff007f"
+        >
+
+            <tspan x="-10" y="72">
+                --:-# +**##%####+*+*%%%%%%%%#**+=====: 
+            </tspan>
+
+            <tspan x="-10" y="81">
+                ==-%%*%@@@@@@%@@@@@@@@%%%%%%##*+==-=--:
+            </tspan>
+
+            <tspan x="-10" y="90">
+                :--%@@%@@@@@@@@@@@@@@@@%%%%%%##*+==-----:
+            </tspan>
+
+            <tspan x="-10" y="99">
+                .=#@@@@@@@@@@@@@@@@@@@@%%%%%%##*+=-------
+            </tspan>
+
+        </text>
+
+    </g>
+
+
+    <g
+        transform="translate(53 65) scale(0.72)"
+        opacity="0.035"
+    >
+
+        <text
+            class="ascii"
+            x="-3"
+            y="0"
+            fill="#39ff14"
+        >
+
+            <tspan x="-10" y="72">
+                --:-# +**##%####+*+*%%%%%%%%#**+=====: 
+            </tspan>
+
+            <tspan x="-10" y="81">
+                ==-%%*%@@@@@@%@@@@@@@@%%%%%%##*+==-=--:
+            </tspan>
+
+        </text>
+
+    </g>
+
+
+    <!-- =========================================================
+         HOLOGRAM SCANLINES
+         ========================================================= -->
+
+    <rect
+        x="20"
+        y="45"
+        width="1140"
+        height="475"
+        fill="url(#scanlines)"
+        opacity="0.65"
+    />
+
+
+    <!-- Moving scan -->
+
+    <rect
+        x="20"
+        y="50"
+        width="1140"
+        height="60"
+        fill="url(#scan)"
+        opacity="0.45"
+    >
+
+        <animate
+            attributeName="y"
+            values="35;500;35"
+            dur="8s"
+            repeatCount="indefinite"
+        />
+
+    </rect>
+
+
+    <!-- =========================================================
+         INFORMATION PANEL
+         
+         IMPORTANTE:
+         A informação está SOBRE o ASCII.
+         ========================================================= -->
+
+    <g>
+
+        <!-- Transparent glass panel -->
+
+        <rect
+            x="455"
+            y="45"
+            width="700"
+            height="475"
+            rx="14"
+            fill="#02070c"
+            fill-opacity="0.72"
+            stroke="#00f0ff"
+            stroke-opacity="0.10"
+            stroke-width="1"
+        />
+
+
+        <!-- Panel top glow -->
+
+        <rect
+            x="455"
+            y="45"
+            width="700"
+            height="1"
+            fill="#00f0ff"
+            opacity="0.25"
+        />
+
+
+        <!-- =====================================================
+             PROFILE
+             ===================================================== -->
+
+        <text
+            x="485"
+            y="78"
+            class="name"
+            filter="url(#textGlow)"
+        >
+            Daniel Lucena
+        </text>
+
+
+        <text
+            x="485"
+            y="98"
+            class="subtitle"
+        >
+            SOFTWARE ENGINEER // BUILDER
+        </text>
+
+
+        <!-- Online -->
+
+        <circle
+            cx="1110"
+            cy="72"
+            r="3.5"
+            fill="#39ff14"
+        >
+
+            <animate
+                attributeName="opacity"
+                values="1;0.2;1"
+                dur="2s"
+                repeatCount="indefinite"
+            />
+
+        </circle>
+
+
+        <text
+            x="1135"
+            y="76"
+            text-anchor="end"
+            fill="#475569"
+            font-size="9"
+        >
+            ONLINE
+        </text>
+
+
+        <!-- Divider -->
+
+        <line
+            x1="485"
+            y1="115"
+            x2="1125"
+            y2="115"
+            stroke="#00f0ff"
+            stroke-width="1"
+            opacity="0.09"
+        />
+
+
+        <!-- =====================================================
+             PROFILE INFORMATION
+             Cada informação ocupa sua própria linha.
+             ===================================================== -->
+
+        <text x="485" y="140">
+            <tspan class="label">Função</tspan>
+            <tspan class="muted"> ............ </tspan>
+            <tspan class="value">Software &amp; Developer</tspan>
+        </text>
+
+
+        <text x="485" y="161">
+            <tspan class="label">Idade</tspan>
+            <tspan class="muted"> ............. </tspan>
+            <tspan class="value">26</tspan>
+        </text>
+
+
+        <text x="485" y="182">
+            <tspan class="label">Status</tspan>
+            <tspan class="muted"> ............ </tspan>
+            <tspan class="value">Fazendo • Lendo • Aprendendo</tspan>
+        </text>
+
+
+        <text x="485" y="203">
+            <tspan class="label">IDE</tspan>
+            <tspan class="muted"> ............... </tspan>
+            <tspan class="value">VS Code • IntelliJ</tspan>
+        </text>
+
+
+        <!-- =====================================================
+             TECH STACK
+             ===================================================== -->
+
+        <line
+            x1="485"
+            y1="225"
+            x2="1125"
+            y2="225"
+            stroke="#00f0ff"
+            stroke-width="1"
+            opacity="0.08"
+        />
+
+
+        <text
+            x="485"
+            y="249"
+            class="pink"
+            font-size="11"
+            font-weight="bold"
+            letter-spacing="1"
+        >
+            // TECH STACK
+        </text>
+
+
+        <!-- AI -->
+
+        <text x="485" y="272">
+
+            <tspan class="label">AI</tspan>
+            <tspan class="muted"> ................ </tspan>
+            <tspan class="skill">LangChain • OpenAI • LLMs</tspan>
+
+        </text>
+
+
+        <!-- Frontend -->
+
+        <text x="485" y="293">
+
+            <tspan class="label">Frontend</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="skill">React • Next.js • Tailwind</tspan>
+
+        </text>
+
+
+        <text x="485" y="309">
+
+            <tspan class="muted">              </tspan>
+            <tspan class="skill">HTML • CSS</tspan>
+
+        </text>
+
+
+        <!-- Backend -->
+
+        <text x="485" y="330">
+
+            <tspan class="label">Backend</tspan>
+            <tspan class="muted"> ......... </tspan>
+            <tspan class="skill">Java • Node.js • Express</tspan>
+
+        </text>
+
+
+        <!-- Database -->
+
+        <text x="485" y="351">
+
+            <tspan class="label">Database</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="skill">PostgreSQL • MongoDB</tspan>
+
+        </text>
+
+
+        <!-- Languages -->
+
+        <text x="485" y="372">
+
+            <tspan class="label">Languages</tspan>
+            <tspan class="muted"> ....... </tspan>
+            <tspan class="skill">Java • JavaScript • TypeScript</tspan>
+
+        </text>
+
+
+        <!-- Architecture -->
+
+        <text x="485" y="393">
+
+            <tspan class="label">Architecture</tspan>
+            <tspan class="muted"> ..... </tspan>
+            <tspan class="skill">REST • APIs • Modular Systems</tspan>
+
+        </text>
+
+
+        <!-- Workflow -->
+
+        <text x="485" y="414">
+
+            <tspan class="label">Workflow</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="skill">Git • VS Code • IntelliJ</tspan>
+
+        </text>
+
+
+        <!-- =====================================================
+             STATUS
+             ===================================================== -->
+
+        <text
+            x="485"
+            y="440"
+            fill="#475569"
+            font-size="8"
+            letter-spacing="1.5"
+        >
+            SYSTEM CAPABILITIES
+        </text>
+
+
+        <rect
+            x="485"
+            y="449"
+            width="640"
+            height="3"
+            rx="2"
+            fill="#101820"
+        />
+
+
+        <rect
+            x="485"
+            y="449"
+            width="500"
+            height="3"
+            rx="2"
+            fill="#00f0ff"
+            opacity="0.45"
+        >
+
+            <animate
+                attributeName="opacity"
+                values="0.25;0.65;0.35;0.55;0.25"
+                dur="3.5s"
+                repeatCount="indefinite"
+            />
+
+        </rect>
+
+
+        <!-- =====================================================
+             CONTACT
+             ===================================================== -->
+
+        <line
+            x1="485"
+            y1="470"
+            x2="1125"
+            y2="470"
+            stroke="#00f0ff"
+            stroke-width="1"
+            opacity="0.08"
+        />
+
+
+        <text
+            x="485"
+            y="493"
+            class="pink"
+            font-size="10"
+            font-weight="bold"
+            letter-spacing="1"
+        >
+            // CONTACT
+        </text>
+
+
+        <text
+            x="485"
+            y="510"
+            class="value"
+            font-size="9"
+        >
+
+            <tspan class="label">E-mail</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="value">lutechdan@gmail.com</tspan>
+
+        </text>
+
+    </g>
+
+
+    <!-- =========================================================
+         ASCII GLITCH BARS
+         ========================================================= -->
+
+    <g
+        opacity="0.12"
     >
 
         <rect
-            x="95"
-            y="70"
-            width="990"
+            x="70"
+            y="170"
+            width="0"
             height="2"
-            fill="#00F0FF"
+            fill="#ff007f"
         >
+
             <animate
-                attributeName="y"
-                values="70;570;70"
-                dur="8s"
+                attributeName="width"
+                values="0;0;140;0;0"
+                dur="5.4s"
                 repeatCount="indefinite"
             />
+
+            <animate
+                attributeName="x"
+                values="60;120;230;60"
+                dur="5.4s"
+                repeatCount="indefinite"
+            />
+
+        </rect>
+
+
+        <rect
+            x="100"
+            y="350"
+            width="0"
+            height="1"
+            fill="#00f0ff"
+        >
+
+            <animate
+                attributeName="width"
+                values="0;100;0;180;0"
+                dur="6s"
+                repeatCount="indefinite"
+            />
+
+            <animate
+                attributeName="x"
+                values="100;240;80;180;100"
+                dur="6s"
+                repeatCount="indefinite"
+            />
+
+        </rect>
+
+
+        <rect
+            x="50"
+            y="440"
+            width="0"
+            height="2"
+            fill="#39ff14"
+        >
+
+            <animate
+                attributeName="width"
+                values="0;80;0;120;0"
+                dur="7s"
+                repeatCount="indefinite"
+            />
+
         </rect>
 
     </g>
@@ -665,19 +1180,19 @@
          ========================================================= -->
 
     <g
-        fill="#00F0FF"
+        fill="#00f0ff"
         filter="url(#particleGlow)"
     >
 
         <circle
-            cx="110"
-            cy="130"
+            cx="55"
+            cy="100"
             r="1"
             opacity="0.35"
         >
             <animate
                 attributeName="cy"
-                values="130;115;130"
+                values="100;90;100"
                 dur="4s"
                 repeatCount="indefinite"
             />
@@ -685,14 +1200,14 @@
 
 
         <circle
-            cx="1060"
-            cy="170"
-            r="1"
-            opacity="0.3"
+            cx="400"
+            cy="160"
+            r="0.8"
+            opacity="0.28"
         >
             <animate
                 attributeName="cy"
-                values="170;185;170"
+                values="160;175;160"
                 dur="5s"
                 repeatCount="indefinite"
             />
@@ -700,30 +1215,30 @@
 
 
         <circle
-            cx="125"
-            cy="500"
-            r="0.8"
-            opacity="0.25"
+            cx="80"
+            cy="430"
+            r="0.7"
+            opacity="0.3"
         >
             <animate
                 attributeName="cx"
-                values="125;145;125"
-                dur="4s"
+                values="80;95;80"
+                dur="3.5s"
                 repeatCount="indefinite"
             />
         </circle>
 
 
         <circle
-            cx="1035"
-            cy="480"
-            r="0.8"
-            opacity="0.25"
+            cx="420"
+            cy="450"
+            r="1"
+            opacity="0.22"
         >
             <animate
                 attributeName="cy"
-                values="480;465;480"
-                dur="4.8s"
+                values="450;435;450"
+                dur="4.5s"
                 repeatCount="indefinite"
             />
         </circle>
@@ -732,482 +1247,21 @@
 
 
     <!-- =========================================================
-         FOREGROUND INFORMATION PANEL
-         
-         O ASCII FICA ATRÁS.
-         AS INFORMAÇÕES FICAM NA FRENTE.
-         ========================================================= -->
-
-    <g>
-
-        <!-- Glass / terminal panel -->
-
-        <rect
-            x="165"
-            y="205"
-            width="850"
-            height="360"
-            rx="14"
-            fill="#02070b"
-            fill-opacity="0.84"
-            stroke="#00F0FF"
-            stroke-width="1"
-            stroke-opacity="0.17"
-        />
-
-
-        <!-- Panel inner line -->
-
-        <rect
-            x="174"
-            y="214"
-            width="832"
-            height="342"
-            rx="10"
-            fill="none"
-            stroke="#00F0FF"
-            stroke-width="1"
-            stroke-opacity="0.035"
-        />
-
-
-        <!-- Top panel indicator -->
-
-        <rect
-            x="185"
-            y="228"
-            width="5"
-            height="5"
-            rx="1"
-            fill="#39FF14"
-        >
-            <animate
-                attributeName="opacity"
-                values="1;0.25;1"
-                dur="2s"
-                repeatCount="indefinite"
-            />
-        </rect>
-
-
-        <text
-            x="200"
-            y="234"
-            fill="#334155"
-            font-size="9"
-            letter-spacing="1.8"
-        >
-            IDENTITY // CORE INFORMATION
-        </text>
-
-
-        <text
-            x="990"
-            y="234"
-            text-anchor="end"
-            fill="#334155"
-            font-size="9"
-        >
-            SECURE_CHANNEL
-        </text>
-
-
-        <!-- =====================================================
-             NAME
-             ===================================================== -->
-
-        <text
-            x="200"
-            y="270"
-            fill="#00F0FF"
-            font-size="22"
-            font-weight="bold"
-            filter="url(#textGlow)"
-        >
-            Daniel Lucena
-        </text>
-
-
-        <text
-            x="200"
-            y="289"
-            fill="#475569"
-            font-size="9"
-            letter-spacing="1.5"
-        >
-            SOFTWARE ENGINEER // BUILDER // AI ENTHUSIAST
-        </text>
-
-
-        <!-- Active status -->
-
-        <circle
-            cx="972"
-            cy="265"
-            r="4"
-            fill="#39FF14"
-        >
-            <animate
-                attributeName="opacity"
-                values="1;0.2;1"
-                dur="2.1s"
-                repeatCount="indefinite"
-            />
-        </circle>
-
-
-        <text
-            x="958"
-            y="269"
-            text-anchor="end"
-            fill="#64748B"
-            font-size="9"
-        >
-            ONLINE
-        </text>
-
-
-        <!-- =====================================================
-             INFORMATION
-             UMA ABAIXO DA OUTRA
-             ===================================================== -->
-
-        <g
-            font-size="12"
-        >
-
-            <!-- Função -->
-
-            <text
-                x="200"
-                y="320"
-            >
-
-                <tspan class="muted">01</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="key">Função</tspan>
-                <tspan class="muted"> ............ </tspan>
-                <tspan class="value">Software &amp; Developer</tspan>
-
-            </text>
-
-
-            <!-- Idade -->
-
-            <text
-                x="200"
-                y="342"
-            >
-
-                <tspan class="muted">02</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="key">Idade</tspan>
-                <tspan class="muted"> ............. </tspan>
-                <tspan class="value">26</tspan>
-
-            </text>
-
-
-            <!-- Status -->
-
-            <text
-                x="200"
-                y="364"
-            >
-
-                <tspan class="muted">03</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="key">Status</tspan>
-                <tspan class="muted"> ............ </tspan>
-                <tspan class="value">Fazendo • Lendo • Aprendendo</tspan>
-
-            </text>
-
-
-            <!-- IDE -->
-
-            <text
-                x="200"
-                y="386"
-            >
-
-                <tspan class="muted">04</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="key">IDE</tspan>
-                <tspan class="muted"> ............... </tspan>
-                <tspan class="value">VS Code • IntelliJ</tspan>
-
-            </text>
-
-        </g>
-
-
-        <!-- =====================================================
-             STACK
-             ===================================================== -->
-
-        <line
-            x1="200"
-            y1="404"
-            x2="980"
-            y2="404"
-            stroke="#00F0FF"
-            stroke-width="1"
-            opacity="0.07"
-        />
-
-
-        <text
-            x="200"
-            y="424"
-            fill="#FF007F"
-            font-size="10"
-            font-weight="bold"
-            letter-spacing="1.5"
-        >
-            // TECH STACK
-        </text>
-
-
-        <g
-            font-size="11"
-        >
-
-            <!-- AI -->
-
-            <text
-                x="200"
-                y="445"
-            >
-
-                <tspan class="muted">05</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="category">AI</tspan>
-                <tspan class="muted"> ................. </tspan>
-                <tspan class="value">LangChain • OpenAI • LLMs</tspan>
-
-            </text>
-
-
-            <!-- Frontend -->
-
-            <text
-                x="200"
-                y="465"
-            >
-
-                <tspan class="muted">06</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="category">Frontend</tspan>
-                <tspan class="muted"> ........ </tspan>
-                <tspan class="value">React • Next.js • Tailwind • HTML/CSS</tspan>
-
-            </text>
-
-
-            <!-- Backend -->
-
-            <text
-                x="200"
-                y="485"
-            >
-
-                <tspan class="muted">07</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="category">Backend</tspan>
-                <tspan class="muted"> ......... </tspan>
-                <tspan class="value">Java • Node.js • Express</tspan>
-
-            </text>
-
-
-            <!-- Database -->
-
-            <text
-                x="200"
-                y="505"
-            >
-
-                <tspan class="muted">08</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="category">Database</tspan>
-                <tspan class="muted"> ........ </tspan>
-                <tspan class="value">PostgreSQL • MongoDB</tspan>
-
-            </text>
-
-
-            <!-- Languages -->
-
-            <text
-                x="200"
-                y="525"
-            >
-
-                <tspan class="muted">09</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="category">Languages</tspan>
-                <tspan class="muted"> ....... </tspan>
-                <tspan class="value">Java • JavaScript • TypeScript</tspan>
-
-            </text>
-
-
-            <!-- Workflow -->
-
-            <text
-                x="200"
-                y="545"
-            >
-
-                <tspan class="muted">10</tspan>
-                <tspan class="muted">  //  </tspan>
-                <tspan class="category">Workflow</tspan>
-                <tspan class="muted"> ........ </tspan>
-                <tspan class="value">Git • VS Code • IntelliJ</tspan>
-
-            </text>
-
-        </g>
-
-    </g>
-
-
-    <!-- =========================================================
-         CONTACT FOOTER
-         ========================================================= -->
-
-    <g>
-
-        <line
-            x1="95"
-            y1="585"
-            x2="1085"
-            y2="585"
-            stroke="#00F0FF"
-            stroke-width="1"
-            opacity="0.07"
-        />
-
-
-        <text
-            x="95"
-            y="603"
-            fill="#FF007F"
-            font-size="9"
-            font-weight="bold"
-            letter-spacing="1"
-        >
-            CONTACT
-        </text>
-
-
-        <text
-            x="185"
-            y="603"
-            font-size="9"
-        >
-
-            <tspan class="key">E-mail</tspan>
-            <tspan class="muted">  ::  </tspan>
-            <tspan class="value">lutechdan@gmail.com</tspan>
-
-        </text>
-
-
-        <text
-            x="700"
-            y="603"
-            font-size="9"
-        >
-
-            <tspan class="key">Phone</tspan>
-            <tspan class="muted">  ::  </tspan>
-            <tspan class="value">(83) 9623-6337</tspan>
-
-        </text>
-
-    </g>
-
-
-    <!-- =========================================================
-         GLITCH BARS
-         ========================================================= -->
-
-    <g
-        clip-path="url(#asciiClip)"
-    >
-
-        <rect
-            x="95"
-            y="160"
-            width="0"
-            height="2"
-            fill="#FF007F"
-            opacity="0.4"
-        >
-
-            <animate
-                attributeName="width"
-                values="0;0;230;0;0"
-                dur="5.5s"
-                repeatCount="indefinite"
-            />
-
-            <animate
-                attributeName="x"
-                values="95;400;220;95"
-                dur="5.5s"
-                repeatCount="indefinite"
-            />
-
-        </rect>
-
-
-        <rect
-            x="95"
-            y="470"
-            width="0"
-            height="1"
-            fill="#00F0FF"
-            opacity="0.5"
-        >
-
-            <animate
-                attributeName="width"
-                values="0;150;0;280;0"
-                dur="6.2s"
-                repeatCount="indefinite"
-            />
-
-            <animate
-                attributeName="x"
-                values="95;500;250;95"
-                dur="6.2s"
-                repeatCount="indefinite"
-            />
-
-        </rect>
-
-    </g>
-
-
-    <!-- =========================================================
-         CORNER HUD MARKERS
+         CORNER HUD
          ========================================================= -->
 
     <g
         fill="none"
-        stroke="#00F0FF"
+        stroke="#00f0ff"
         stroke-width="1"
         opacity="0.35"
     >
 
-        <path d="M95 90 V70 H115"/>
-        <path d="M1085 90 V70 H1065"/>
+        <path d="M22 80 V60 H42"/>
+        <path d="M1158 80 V60 H1138"/>
 
-        <path d="M95 550 V570 H115"/>
-        <path d="M1085 550 V570 H1065"/>
+        <path d="M22 500 V520 H42"/>
+        <path d="M1158 500 V520 H1138"/>
 
     </g>
 
@@ -1217,18 +1271,18 @@
          ========================================================= -->
 
     <rect
-        x="20"
+        x="10"
         y="0"
-        width="1140"
-        height="45"
-        fill="url(#scanGradient)"
-        opacity="0.25"
+        width="1160"
+        height="2"
+        fill="#00f0ff"
+        opacity="0.035"
     >
 
         <animate
             attributeName="y"
-            values="-50;620;-50"
-            dur="10s"
+            values="0;560;0"
+            dur="11s"
             repeatCount="indefinite"
         />
 
@@ -1243,15 +1297,15 @@
         x="0"
         y="0"
         width="1180"
-        height="620"
-        fill="#00F0FF"
+        height="560"
+        fill="#00f0ff"
         opacity="0"
     >
 
         <animate
             attributeName="opacity"
-            values="0;0;0.012;0;0.006;0;0"
-            dur="7s"
+            values="0;0;0.018;0;0.008;0;0"
+            dur="8s"
             repeatCount="indefinite"
         />
 
@@ -1259,18 +1313,33 @@
 
 
     <!-- =========================================================
-         FINAL STATUS
+         BOTTOM TERMINAL STATUS
          ========================================================= -->
 
-    <text
-        x="1085"
-        y="603"
-        text-anchor="end"
-        fill="#334155"
-        font-size="8"
-        letter-spacing="1"
-    >
-        MATRIX_LAYER // STABLE
-    </text>
+    <g>
+
+        <text
+            x="24"
+            y="543"
+            fill="#263746"
+            font-size="7"
+            letter-spacing="1"
+        >
+            MATRIX_LAYER // HOLOGRAPHIC_INTERFACE
+        </text>
+
+
+        <text
+            x="1155"
+            y="543"
+            text-anchor="end"
+            fill="#263746"
+            font-size="7"
+        >
+            SYSTEM_READY
+        </text>
+
+    </g>
+
 
 </svg>
