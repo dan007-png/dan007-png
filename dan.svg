@@ -15,80 +15,31 @@
 
     <defs>
 
-        <!-- =====================================================
-             BACKGROUND
-             ===================================================== -->
-
-        <radialGradient id="bgGradient" cx="50%" cy="40%" r="75%">
-            <stop offset="0%" stop-color="#071820"/>
-            <stop offset="45%" stop-color="#050c12"/>
+        <!-- Background -->
+        <radialGradient id="bg" cx="50%" cy="45%" r="75%">
+            <stop offset="0%" stop-color="#07151b"/>
+            <stop offset="45%" stop-color="#050b10"/>
             <stop offset="100%" stop-color="#020408"/>
         </radialGradient>
 
-
-        <linearGradient
-            id="borderGradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-        >
-            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.55"/>
-            <stop offset="30%" stop-color="#00f0ff" stop-opacity="0.08"/>
-            <stop offset="65%" stop-color="#ff007f" stop-opacity="0.05"/>
-            <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.40"/>
+        <!-- Cyan hologram -->
+        <linearGradient id="holo" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#00f0ff"/>
+            <stop offset="50%" stop-color="#39d9ff"/>
+            <stop offset="100%" stop-color="#00a8c7"/>
         </linearGradient>
 
+        <!-- Border -->
+        <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#00f0ff" stop-opacity=".55"/>
+            <stop offset="35%" stop-color="#00f0ff" stop-opacity=".08"/>
+            <stop offset="70%" stop-color="#ff007f" stop-opacity=".08"/>
+            <stop offset="100%" stop-color="#00f0ff" stop-opacity=".4"/>
+        </linearGradient>
 
-        <!-- =====================================================
-             HOLOGRAM GLOW
-             ===================================================== -->
-
+        <!-- Hologram glow -->
         <filter
             id="holoGlow"
-            x="-40%"
-            y="-40%"
-            width="180%"
-            height="180%"
-        >
-
-            <feGaussianBlur
-                in="SourceGraphic"
-                stdDeviation="1.4"
-                result="blur1"
-            />
-
-            <feGaussianBlur
-                in="SourceGraphic"
-                stdDeviation="4"
-                result="blur2"
-            />
-
-            <feColorMatrix
-                in="blur2"
-                type="matrix"
-                values="
-                    0 0 0 0 0
-                    0 0 0 0 0.9
-                    0 0 0 0 1
-                    0 0 0 0.55 0
-                "
-                result="cyanGlow"
-            />
-
-            <feMerge>
-                <feMergeNode in="blur1"/>
-                <feMergeNode in="cyanGlow"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-
-        </filter>
-
-
-        <!-- Strong text glow -->
-
-        <filter
-            id="textGlow"
             x="-30%"
             y="-30%"
             width="160%"
@@ -97,30 +48,42 @@
 
             <feGaussianBlur
                 in="SourceGraphic"
-                stdDeviation="1"
+                stdDeviation="2"
                 result="blur"
             />
 
+            <feColorMatrix
+                in="blur"
+                type="matrix"
+                values="
+                    0 0 0 0 0
+                    0 0 0 0 .8
+                    0 0 0 0 1
+                    0 0 0 .8 0
+                "
+                result="cyan"
+            />
+
             <feMerge>
-                <feMergeNode in="blur"/>
+                <feMergeNode in="cyan"/>
                 <feMergeNode in="SourceGraphic"/>
             </feMerge>
 
         </filter>
 
 
-        <!-- Small particle glow -->
-
+        <!-- Small text glow -->
         <filter
-            id="particleGlow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="300%"
+            id="textGlow"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
         >
 
             <feGaussianBlur
-                stdDeviation="1.5"
+                in="SourceGraphic"
+                stdDeviation=".7"
                 result="blur"
             />
 
@@ -132,10 +95,44 @@
         </filter>
 
 
-        <!-- =====================================================
-             SCANLINE
-             ===================================================== -->
+        <!-- Particle glow -->
+        <filter id="particleGlow">
 
+            <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="1.2"
+                result="blur"
+            />
+
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+
+        </filter>
+
+
+        <!-- Scanlines -->
+        <pattern
+            id="scanlines"
+            width="100%"
+            height="7"
+            patternUnits="userSpaceOnUse"
+        >
+
+            <rect
+                x="0"
+                y="0"
+                width="100%"
+                height="1"
+                fill="#00f0ff"
+                opacity=".035"
+            />
+
+        </pattern>
+
+
+        <!-- Moving scan -->
         <linearGradient
             id="scanGradient"
             x1="0"
@@ -151,21 +148,21 @@
             />
 
             <stop
-                offset="45%"
+                offset="48%"
                 stop-color="#00f0ff"
-                stop-opacity="0.015"
+                stop-opacity=".02"
             />
 
             <stop
                 offset="50%"
                 stop-color="#00f0ff"
-                stop-opacity="0.20"
+                stop-opacity=".20"
             />
 
             <stop
-                offset="55%"
+                offset="52%"
                 stop-color="#00f0ff"
-                stop-opacity="0.015"
+                stop-opacity=".02"
             />
 
             <stop
@@ -177,92 +174,32 @@
         </linearGradient>
 
 
-        <!-- =====================================================
-             HORIZONTAL SCANLINES
-             ===================================================== -->
-
-        <pattern
-            id="scanlines"
-            width="100%"
-            height="7"
-            patternUnits="userSpaceOnUse"
-        >
-
-            <rect
-                width="100%"
-                height="1"
-                fill="#00f0ff"
-                opacity="0.025"
-            />
-
-        </pattern>
-
-
-        <!-- =====================================================
-             ASCII CLIP
-             ===================================================== -->
-
+        <!-- ASCII clipping -->
         <clipPath id="asciiClip">
 
             <rect
-                x="90"
-                y="55"
-                width="1000"
-                height="445"
-                rx="12"
+                x="55"
+                y="72"
+                width="1070"
+                height="420"
+                rx="16"
             />
 
         </clipPath>
 
 
-        <!-- =====================================================
-             FOREGROUND CONTENT CLIP
-             ===================================================== -->
-
+        <!-- Content clipping -->
         <clipPath id="contentClip">
 
             <rect
-                x="320"
-                y="105"
-                width="540"
-                height="410"
-                rx="12"
+                x="42"
+                y="42"
+                width="1096"
+                height="476"
+                rx="15"
             />
 
         </clipPath>
-
-
-        <!-- =====================================================
-             GLASS PANEL
-             ===================================================== -->
-
-        <linearGradient
-            id="glassGradient"
-            x1="0"
-            y1="0"
-            x2="1"
-            y2="1"
-        >
-
-            <stop
-                offset="0%"
-                stop-color="#06151c"
-                stop-opacity="0.78"
-            />
-
-            <stop
-                offset="50%"
-                stop-color="#02070c"
-                stop-opacity="0.84"
-            />
-
-            <stop
-                offset="100%"
-                stop-color="#061018"
-                stop-opacity="0.74"
-            />
-
-        </linearGradient>
 
 
         <!-- =====================================================
@@ -274,50 +211,60 @@
             .ascii {
                 fill: #00f0ff;
                 font-size: 15px;
-                font-weight: 400;
                 letter-spacing: 0;
             }
 
-            .name {
-                fill: #e5faff;
-                font-size: 22px;
-                font-weight: bold;
-            }
-
-            .subtitle {
-                fill: #526575;
-                font-size: 10px;
-                letter-spacing: 2px;
-            }
-
             .key {
-                fill: #5eead4;
+                fill: #5EEAD4;
                 font-weight: 600;
             }
 
             .value {
-                fill: #e5e7eb;
+                fill: #E5E7EB;
             }
 
             .muted {
-                fill: #526273;
+                fill: #526171;
             }
 
-            .category {
-                fill: #00f0ff;
-                font-weight: bold;
+            .dim {
+                fill: #334155;
             }
 
-            .skill {
-                fill: #cbd5e1;
+            .cyan {
+                fill: #00F0FF;
             }
 
             .pink {
-                fill: #ff007f;
+                fill: #FF007F;
             }
 
             .green {
-                fill: #39ff14;
+                fill: #39FF14;
+            }
+
+            .section {
+                fill: #FF007F;
+                font-size: 11px;
+                font-weight: bold;
+                letter-spacing: 1.5px;
+            }
+
+            .label {
+                fill: #5EEAD4;
+                font-size: 11px;
+                font-weight: 600;
+            }
+
+            .data {
+                fill: #E5E7EB;
+                font-size: 11px;
+            }
+
+            .tiny {
+                fill: #475569;
+                font-size: 9px;
+                letter-spacing: 1.3px;
             }
 
             text,
@@ -349,43 +296,43 @@
         width="1178"
         height="558"
         rx="17"
-        fill="url(#bgGradient)"
-        stroke="url(#borderGradient)"
+        fill="url(#bg)"
+        stroke="url(#border)"
         stroke-width="1.5"
     />
 
     <!-- Inner border -->
 
     <rect
-        x="9"
-        y="9"
-        width="1162"
-        height="542"
+        x="10"
+        y="10"
+        width="1160"
+        height="540"
         rx="13"
         fill="none"
         stroke="#00f0ff"
         stroke-width="1"
-        opacity="0.035"
+        opacity=".035"
     />
 
 
     <!-- =========================================================
-         TOP TERMINAL BAR
+         TERMINAL HEADER
          ========================================================= -->
 
     <g>
 
         <circle
-            cx="25"
-            cy="24"
-            r="3"
+            cx="27"
+            cy="27"
+            r="4"
             fill="#39ff14"
         >
 
             <animate
                 attributeName="opacity"
-                values="1;0.25;1;0.7;1"
-                dur="2.4s"
+                values="1;.25;1;.55;1"
+                dur="2.8s"
                 repeatCount="indefinite"
             />
 
@@ -393,11 +340,9 @@
 
 
         <text
-            x="38"
-            y="27"
-            fill="#435463"
-            font-size="9"
-            letter-spacing="2"
+            x="40"
+            y="30"
+            class="tiny"
         >
             ONLINE
         </text>
@@ -405,22 +350,21 @@
 
         <text
             x="590"
-            y="27"
+            y="30"
             text-anchor="middle"
-            fill="#263743"
+            fill="#334155"
             font-size="9"
             letter-spacing="3"
         >
-            DANIEL // PROFILE_NODE
+            DANIEL_LUCENA // SYSTEM_PROFILE
         </text>
 
 
         <text
             x="1150"
-            y="27"
+            y="30"
             text-anchor="end"
-            fill="#263743"
-            font-size="9"
+            class="tiny"
         >
             0xD4N13L
         </text>
@@ -429,29 +373,19 @@
 
 
     <!-- =========================================================
-         ASCII HOLOGRAM BACKGROUND
+         ASCII HOLOGRAPHIC BACKGROUND
          ========================================================= -->
 
     <g
-        id="ascii-art"
         clip-path="url(#asciiClip)"
+        opacity=".15"
         filter="url(#holoGlow)"
-        opacity="0.25"
     >
 
-        <!--
-        =========================================================
-        ASCII
-        =========================================================
-
-        O ASCII foi reduzido e centralizado para funcionar como
-        holograma de fundo.
-
-        =========================================================
-        -->
+        <!-- Main ASCII -->
 
         <g
-            transform="translate(315 55) scale(0.48)"
+            transform="translate(180 105) scale(.43 .62)"
         >
 
             <text
@@ -536,87 +470,73 @@
 
         </g>
 
-
-        <!-- Hologram flicker -->
-
-        <animate
-            attributeName="opacity"
-            values="0.16;0.25;0.20;0.28;0.17;0.24;0.16"
-            dur="5.5s"
-            repeatCount="indefinite"
-        />
-
     </g>
 
 
     <!-- =========================================================
-         SECONDARY ASCII GHOST
+         ASCII SECOND GHOST
          ========================================================= -->
 
     <g
         clip-path="url(#asciiClip)"
-        opacity="0.045"
-        transform="translate(319 55) scale(0.48)"
+        opacity=".035"
+        transform="translate(4 0)"
+        filter="url(#holoGlow)"
     >
 
-        <text
-            x="0"
-            y="0"
-            class="ascii"
-            fill="#ff007f"
-        >
+        <g transform="translate(180 105) scale(.43 .62)">
 
-            <tspan x="-10" y="42">                                         --:-# +**##%####+*+*%%%%%%%%#**+=====: </tspan>
-            <tspan x="-10" y="51">                                         ==-%%*%@@@@@@%@@@@@@@@%%%%%%##*+==-=--: </tspan>
-            <tspan x="-10" y="60">                                        :--%@@%@@@@@@@@@@@@@@@@%%%%%%##*+==-----: </tspan>
-            <tspan x="-10" y="69">                                        .=#@@@@@@@@@@@@@@@@@@@@%%%%%%##*+=------- </tspan>
+            <text
+                x="0"
+                y="0"
+                class="ascii"
+                fill="#ff007f"
+            >
 
-        </text>
+                <tspan x="-10" y="42">                                         --:-# +**##%####+*+*%%%%%%%%#**+=====: </tspan>
+                <tspan x="-10" y="51">                                         ==-%%*%@@@@@@%@@@@@@@@%%%%%%##*+==-=--: </tspan>
+                <tspan x="-10" y="60">                                        :--%@@%@@@@@@@@@@@@@@@@%%%%%%##*+==-----: </tspan>
+                <tspan x="-10" y="69">                                        .=#@@@@@@@@@@@@@@@@@@@@%%%%%%##*+=------- </tspan>
+                <tspan x="-10" y="78">                                        .+@@@@@@@@@@@@@@@@@@@@%%%%%%%##*+=-------: </tspan>
+                <tspan x="-10" y="87">                                       .:+@@@@@@@@@@@@@@@@@@@@%%%%%%###*+==-=----:. </tspan>
 
-        <animateTransform
-            attributeName="transform"
-            type="translate"
-            values="319 55;323 55;318 55;319 55"
-            dur="4.7s"
-            repeatCount="indefinite"
-        />
+            </text>
+
+        </g>
 
     </g>
 
 
     <!-- =========================================================
-         ASCII SCANLINES
+         HOLOGRAM SCANLINES
          ========================================================= -->
 
     <rect
-        x="90"
-        y="55"
-        width="1000"
-        height="445"
-        rx="12"
+        x="40"
+        y="48"
+        width="1100"
+        height="470"
+        rx="15"
         fill="url(#scanlines)"
-        opacity="0.55"
-        clip-path="url(#asciiClip)"
+        opacity=".55"
+        clip-path="url(#contentClip)"
     />
 
 
-    <!-- =========================================================
-         MOVING HOLOGRAM SCAN
-         ========================================================= -->
+    <!-- Moving scan -->
 
     <rect
-        x="90"
-        y="55"
-        width="1000"
+        x="40"
+        y="-70"
+        width="1100"
         height="65"
         fill="url(#scanGradient)"
-        opacity="0.7"
-        clip-path="url(#asciiClip)"
+        opacity=".7"
     >
 
         <animate
             attributeName="y"
-            values="20;480;20"
+            values="-70;560;-70"
             dur="8s"
             repeatCount="indefinite"
         />
@@ -625,124 +545,64 @@
 
 
     <!-- =========================================================
-         GLITCH BARS
+         FOREGROUND TERMINAL PANEL
          ========================================================= -->
 
-    <g
-        clip-path="url(#asciiClip)"
-        opacity="0.16"
-    >
-
-        <rect
-            x="170"
-            y="175"
-            width="0"
-            height="2"
-            fill="#00f0ff"
-        >
-
-            <animate
-                attributeName="width"
-                values="0;0;180;260;0;0"
-                dur="5.8s"
-                repeatCount="indefinite"
-            />
-
-            <animate
-                attributeName="x"
-                values="170;280;410;210;170"
-                dur="5.8s"
-                repeatCount="indefinite"
-            />
-
-        </rect>
-
-
-        <rect
-            x="700"
-            y="335"
-            width="0"
-            height="1"
-            fill="#ff007f"
-        >
-
-            <animate
-                attributeName="width"
-                values="0;120;240;0;80;0"
-                dur="6.7s"
-                repeatCount="indefinite"
-            />
-
-            <animate
-                attributeName="x"
-                values="700;580;760;650;700"
-                dur="6.7s"
-                repeatCount="indefinite"
-            />
-
-        </rect>
-
-    </g>
-
-
-    <!-- =========================================================
-         DARK GLASS CONTENT PANEL
-         ========================================================= -->
+    <!-- This is intentionally transparent.
+         ASCII remains visible behind the information. -->
 
     <rect
-        x="320"
-        y="92"
-        width="540"
-        height="425"
-        rx="16"
+        x="42"
+        y="48"
+        width="1096"
+        height="466"
+        rx="14"
         fill="#02060a"
-        fill-opacity="0.62"
+        fill-opacity=".47"
         stroke="#00f0ff"
+        stroke-opacity=".07"
         stroke-width="1"
-        stroke-opacity="0.10"
-    />
-
-
-    <rect
-        x="327"
-        y="99"
-        width="526"
-        height="411"
-        rx="13"
-        fill="url(#glassGradient)"
-        opacity="0.72"
-    />
-
-
-    <!-- subtle panel highlight -->
-
-    <rect
-        x="328"
-        y="100"
-        width="524"
-        height="1"
-        fill="#00f0ff"
-        opacity="0.15"
     />
 
 
     <!-- =========================================================
-         PANEL HEADER
+         PROFILE HEADER
          ========================================================= -->
 
-    <g>
+    <g clip-path="url(#contentClip)">
+
+        <text
+            x="64"
+            y="83"
+            fill="#00f0ff"
+            font-size="21"
+            font-weight="bold"
+            filter="url(#textGlow)"
+        >
+            Daniel Lucena
+        </text>
+
+
+        <text
+            x="64"
+            y="103"
+            class="tiny"
+        >
+            SOFTWARE ENGINEER // BUILDER
+        </text>
+
 
         <circle
-            cx="345"
-            cy="119"
-            r="3"
+            cx="1080"
+            cy="76"
+            r="4"
             fill="#39ff14"
         >
 
             <animate
                 attributeName="opacity"
-                values="1;0.3;1"
-                dur="2s"
+                values="1;.25;1;.55;1"
+                dur="2.2s"
                 repeatCount="indefinite"
             />
 
@@ -750,314 +610,397 @@
 
 
         <text
-            x="357"
-            y="123"
-            fill="#526575"
-            font-size="9"
-            letter-spacing="1.5"
+            x="1096"
+            y="80"
+            text-anchor="start"
+            class="tiny"
         >
-            PROFILE_TERMINAL
+            ACTIVE
+        </text>
+
+    </g>
+
+
+    <!-- =========================================================
+         THREE COLUMN GRID
+         ========================================================= -->
+
+    <g clip-path="url(#contentClip)">
+
+        <!-- Vertical separators -->
+
+        <line
+            x1="390"
+            y1="122"
+            x2="390"
+            y2="475"
+            stroke="#00f0ff"
+            stroke-width="1"
+            opacity=".06"
+        />
+
+        <line
+            x1="770"
+            y1="122"
+            x2="770"
+            y2="475"
+            stroke="#00f0ff"
+            stroke-width="1"
+            opacity=".06"
+        />
+
+
+        <!-- =====================================================
+             COLUMN 1
+             PROFILE
+             ===================================================== -->
+
+        <text
+            x="64"
+            y="135"
+            class="section"
+        >
+            // PROFILE
+        </text>
+
+
+        <text x="64" y="160">
+            <tspan class="label">Função</tspan>
+        </text>
+
+        <text x="64" y="178" class="data">
+            Software &amp; Developer
+        </text>
+
+
+        <text x="64" y="207">
+            <tspan class="label">Idade</tspan>
+        </text>
+
+        <text x="64" y="225" class="data">
+            26
+        </text>
+
+
+        <text x="64" y="254">
+            <tspan class="label">Status</tspan>
+        </text>
+
+        <text x="64" y="272" class="data">
+            Fazendo • Lendo •
+        </text>
+
+        <text x="64" y="288" class="data">
+            Aprendendo
+        </text>
+
+
+        <text x="64" y="317">
+            <tspan class="label">IDE</tspan>
+        </text>
+
+        <text x="64" y="335" class="data">
+            VS Code • IntelliJ
+        </text>
+
+
+        <text x="64" y="365">
+            <tspan class="label">Mindset</tspan>
+        </text>
+
+        <text x="64" y="383" class="data">
+            Build • Learn • Improve
         </text>
 
 
         <text
-            x="835"
-            y="123"
-            text-anchor="end"
-            fill="#263743"
-            font-size="8"
+            x="64"
+            y="420"
+            class="tiny"
         >
-            SECURE_SESSION
+            CURRENT_MODE
+        </text>
+
+        <text
+            x="64"
+            y="442"
+            class="cyan"
+            font-size="11"
+        >
+            LEARNING / BUILDING
+        </text>
+
+
+        <!-- =====================================================
+             COLUMN 2
+             AI + FRONTEND
+             ===================================================== -->
+
+        <text
+            x="420"
+            y="135"
+            class="section"
+        >
+            // DEVELOPMENT
+        </text>
+
+
+        <text x="420" y="160">
+            <tspan class="label">AI</tspan>
+        </text>
+
+        <text x="420" y="178" class="data">
+            LangChain • OpenAI
+        </text>
+
+        <text x="420" y="194" class="data">
+            LLMs • AI Integration
+        </text>
+
+
+        <text x="420" y="223">
+            <tspan class="label">Frontend</tspan>
+        </text>
+
+        <text x="420" y="241" class="data">
+            React • Next.js
+        </text>
+
+        <text x="420" y="257" class="data">
+            Tailwind • HTML/CSS
+        </text>
+
+
+        <text x="420" y="286">
+            <tspan class="label">Languages</tspan>
+        </text>
+
+        <text x="420" y="304" class="data">
+            Java • JavaScript
+        </text>
+
+        <text x="420" y="320" class="data">
+            TypeScript
+        </text>
+
+
+        <text x="420" y="349">
+            <tspan class="label">Architecture</tspan>
+        </text>
+
+        <text x="420" y="367" class="data">
+            REST • APIs
+        </text>
+
+        <text x="420" y="383" class="data">
+            Modular Systems
+        </text>
+
+
+        <text
+            x="420"
+            y="420"
+            class="tiny"
+        >
+            DEVELOPMENT_STACK
+        </text>
+
+        <text
+            x="420"
+            y="442"
+            class="cyan"
+            font-size="11"
+        >
+            FULL STACK + AI
+        </text>
+
+
+        <!-- =====================================================
+             COLUMN 3
+             BACKEND + DATABASE + CONTACT
+             ===================================================== -->
+
+        <text
+            x="800"
+            y="135"
+            class="section"
+        >
+            // STACK
+        </text>
+
+
+        <text x="800" y="160">
+            <tspan class="label">Backend</tspan>
+        </text>
+
+        <text x="800" y="178" class="data">
+            Java • Node.js
+        </text>
+
+        <text x="800" y="194" class="data">
+            Express
+        </text>
+
+
+        <text x="800" y="223">
+            <tspan class="label">Database</tspan>
+        </text>
+
+        <text x="800" y="241" class="data">
+            PostgreSQL
+        </text>
+
+        <text x="800" y="257" class="data">
+            MongoDB
+        </text>
+
+
+        <text x="800" y="286">
+            <tspan class="label">Workflow</tspan>
+        </text>
+
+        <text x="800" y="304" class="data">
+            Git • VS Code
+        </text>
+
+        <text x="800" y="320" class="data">
+            IntelliJ
+        </text>
+
+
+        <text x="800" y="349">
+            <tspan class="label">Focus</tspan>
+        </text>
+
+        <text x="800" y="367" class="data">
+            Software Engineering
+        </text>
+
+        <text x="800" y="383" class="data">
+            AI • Backend • Web
+        </text>
+
+
+        <text
+            x="800"
+            y="420"
+            class="tiny"
+        >
+            CONTACT
+        </text>
+
+        <text
+            x="800"
+            y="442"
+            class="data"
+        >
+            lutechdan@gmail.com
+        </text>
+
+
+        <!-- =====================================================
+             BOTTOM STATUS
+             ===================================================== -->
+
+        <line
+            x1="64"
+            y1="468"
+            x2="1110"
+            y2="468"
+            stroke="#00f0ff"
+            stroke-width="1"
+            opacity=".07"
+        />
+
+
+        <text
+            x="64"
+            y="491"
+            class="tiny"
+        >
+            SYSTEM_CAPABILITIES
+        </text>
+
+
+        <rect
+            x="205"
+            y="486"
+            width="350"
+            height="3"
+            rx="2"
+            fill="#111827"
+        />
+
+        <rect
+            x="205"
+            y="486"
+            width="265"
+            height="3"
+            rx="2"
+            fill="#00f0ff"
+            opacity=".55"
+        >
+
+            <animate
+                attributeName="width"
+                values="230;290;255;280;230"
+                dur="4s"
+                repeatCount="indefinite"
+            />
+
+            <animate
+                attributeName="opacity"
+                values=".35;.7;.45;.6;.35"
+                dur="3.5s"
+                repeatCount="indefinite"
+            />
+
+        </rect>
+
+
+        <text
+            x="1110"
+            y="491"
+            text-anchor="end"
+            class="tiny"
+        >
+            SYSTEM // READY
         </text>
 
     </g>
 
 
     <!-- =========================================================
-         NAME
-         ========================================================= -->
-
-    <text
-        x="590"
-        y="157"
-        text-anchor="middle"
-        class="name"
-        filter="url(#textGlow)"
-    >
-        Daniel Lucena
-    </text>
-
-
-    <text
-        x="590"
-        y="175"
-        text-anchor="middle"
-        class="subtitle"
-    >
-        SOFTWARE ENGINEER // BUILDER
-    </text>
-
-
-    <!-- =========================================================
-         PROFILE INFORMATION
+         GLITCH BARS
          ========================================================= -->
 
     <g
         clip-path="url(#contentClip)"
-        font-size="12"
+        opacity="0"
     >
 
-        <!-- Function -->
+        <rect
+            x="60"
+            y="150"
+            width="180"
+            height="1"
+            fill="#ff007f"
+        />
 
-        <text x="365" y="205">
-            <tspan class="muted">. </tspan>
-            <tspan class="key">Função</tspan>
-            <tspan class="muted"> ......... </tspan>
-            <tspan class="value">Software &amp; Developer</tspan>
-        </text>
-
-
-        <!-- Age -->
-
-        <text x="365" y="224">
-            <tspan class="muted">. </tspan>
-            <tspan class="key">Idade</tspan>
-            <tspan class="muted"> .......... </tspan>
-            <tspan class="value">26</tspan>
-        </text>
-
-
-        <!-- Status -->
-
-        <text x="365" y="243">
-            <tspan class="muted">. </tspan>
-            <tspan class="key">Status</tspan>
-            <tspan class="muted"> ........ </tspan>
-            <tspan class="value">Fazendo • Lendo • Aprendendo</tspan>
-        </text>
-
-
-        <!-- IDE -->
-
-        <text x="365" y="262">
-            <tspan class="muted">. </tspan>
-            <tspan class="key">IDE</tspan>
-            <tspan class="muted"> ........... </tspan>
-            <tspan class="value">VS Code • IntelliJ</tspan>
-        </text>
-
-    </g>
-
-
-    <!-- =========================================================
-         DIVIDER
-         ========================================================= -->
-
-    <line
-        x1="365"
-        y1="280"
-        x2="815"
-        y2="280"
-        stroke="#00f0ff"
-        stroke-width="1"
-        opacity="0.09"
-    />
-
-
-    <!-- =========================================================
-         TECH STACK
-         ========================================================= -->
-
-    <text
-        x="365"
-        y="300"
-        class="pink"
-        font-size="11"
-        font-weight="bold"
-        letter-spacing="1"
-    >
-        // TECH STACK
-    </text>
-
-
-    <!-- =========================================================
-         SKILLS
-         ========================================================= -->
-
-    <g
-        clip-path="url(#contentClip)"
-        font-size="11"
-    >
-
-        <text x="365" y="322">
-            <tspan class="category">AI</tspan>
-            <tspan class="muted"> ............ </tspan>
-            <tspan class="skill">LangChain • OpenAI • LLMs</tspan>
-        </text>
-
-
-        <text x="365" y="341">
-            <tspan class="category">Frontend</tspan>
-            <tspan class="muted"> ....... </tspan>
-            <tspan class="skill">React • Next.js • Tailwind</tspan>
-        </text>
-
-
-        <text x="365" y="360">
-            <tspan class="category">Backend</tspan>
-            <tspan class="muted"> ........ </tspan>
-            <tspan class="skill">Java • Node.js • Express</tspan>
-        </text>
-
-
-        <text x="365" y="379">
-            <tspan class="category">Database</tspan>
-            <tspan class="muted"> ....... </tspan>
-            <tspan class="skill">PostgreSQL • MongoDB</tspan>
-        </text>
-
-
-        <text x="365" y="398">
-            <tspan class="category">Languages</tspan>
-            <tspan class="muted"> ...... </tspan>
-            <tspan class="skill">Java • JavaScript • TypeScript</tspan>
-        </text>
-
-
-        <text x="365" y="417">
-            <tspan class="category">Architecture</tspan>
-            <tspan class="muted"> .... </tspan>
-            <tspan class="skill">REST • APIs • Modular Systems</tspan>
-        </text>
-
-
-        <text x="365" y="436">
-            <tspan class="category">Workflow</tspan>
-            <tspan class="muted"> ....... </tspan>
-            <tspan class="skill">Git • VS Code • IntelliJ</tspan>
-        </text>
-
-    </g>
-
-
-    <!-- =========================================================
-         STATUS BAR
-         ========================================================= -->
-
-    <text
-        x="365"
-        y="461"
-        fill="#394b58"
-        font-size="8"
-        letter-spacing="1.5"
-    >
-        SYSTEM_CAPABILITIES
-    </text>
-
-
-    <rect
-        x="365"
-        y="469"
-        width="450"
-        height="3"
-        rx="2"
-        fill="#0d1820"
-    />
-
-
-    <rect
-        x="365"
-        y="469"
-        width="350"
-        height="3"
-        rx="2"
-        fill="#00f0ff"
-        opacity="0.45"
-    >
-
-        <animate
-            attributeName="width"
-            values="320;390;350;370;330"
-            dur="4s"
-            repeatCount="indefinite"
+        <rect
+            x="680"
+            y="330"
+            width="230"
+            height="1"
+            fill="#00f0ff"
         />
 
         <animate
             attributeName="opacity"
-            values="0.3;0.65;0.4;0.55;0.3"
-            dur="4s"
+            values="0;0;.12;0;.04;0"
+            dur="5.5s"
             repeatCount="indefinite"
         />
-
-    </rect>
-
-
-    <!-- =========================================================
-         CONTACT
-         ========================================================= -->
-
-    <line
-        x1="365"
-        y1="486"
-        x2="815"
-        y2="486"
-        stroke="#00f0ff"
-        stroke-width="1"
-        opacity="0.07"
-    />
-
-
-    <text
-        x="365"
-        y="502"
-        class="pink"
-        font-size="9"
-        font-weight="bold"
-        letter-spacing="1"
-    >
-        // CONTACT
-    </text>
-
-
-    <text
-        x="365"
-        y="517"
-        font-size="9"
-    >
-
-        <tspan class="key">E-mail</tspan>
-        <tspan class="muted"> .. </tspan>
-        <tspan class="value">lutechdan@gmail.com</tspan>
-
-    </text>
-
-
-    <!-- =========================================================
-         CORNER HUD MARKERS
-         ========================================================= -->
-
-    <g
-        fill="none"
-        stroke="#00f0ff"
-        stroke-width="1"
-        opacity="0.45"
-    >
-
-        <!-- top left -->
-
-        <path d="M24 74 V56 H43"/>
-
-        <!-- top right -->
-
-        <path d="M1156 74 V56 H1137"/>
-
-        <!-- bottom left -->
-
-        <path d="M24 486 V504 H43"/>
-
-        <!-- bottom right -->
-
-        <path d="M1156 486 V504 H1137"/>
 
     </g>
 
@@ -1072,63 +1015,91 @@
     >
 
         <circle
-            cx="125"
-            cy="120"
+            cx="55"
+            cy="115"
             r="1"
-            opacity="0.35"
+            opacity=".35"
         >
+
             <animate
                 attributeName="cy"
-                values="120;108;120"
+                values="115;105;115"
                 dur="4s"
                 repeatCount="indefinite"
             />
+
         </circle>
 
 
         <circle
-            cx="1020"
-            cy="155"
-            r="0.8"
-            opacity="0.25"
+            cx="1120"
+            cy="125"
+            r=".8"
+            opacity=".25"
         >
+
             <animate
                 attributeName="cy"
-                values="155;168;155"
+                values="125;140;125"
                 dur="5s"
                 repeatCount="indefinite"
             />
+
         </circle>
 
 
         <circle
-            cx="180"
-            cy="440"
-            r="0.8"
-            opacity="0.3"
+            cx="65"
+            cy="450"
+            r=".8"
+            opacity=".25"
         >
+
             <animate
                 attributeName="cx"
-                values="180;195;180"
+                values="65;80;65"
+                dur="3.5s"
+                repeatCount="indefinite"
+            />
+
+        </circle>
+
+
+        <circle
+            cx="1100"
+            cy="450"
+            r="1"
+            opacity=".2"
+        >
+
+            <animate
+                attributeName="cy"
+                values="450;435;450"
                 dur="4.5s"
                 repeatCount="indefinite"
             />
+
         </circle>
 
+    </g>
 
-        <circle
-            cx="980"
-            cy="430"
-            r="1"
-            opacity="0.25"
-        >
-            <animate
-                attributeName="cy"
-                values="430;416;430"
-                dur="5s"
-                repeatCount="indefinite"
-            />
-        </circle>
+
+    <!-- =========================================================
+         CORNER HUD MARKERS
+         ========================================================= -->
+
+    <g
+        fill="none"
+        stroke="#00f0ff"
+        stroke-width="1"
+        opacity=".35"
+    >
+
+        <path d="M25 80 V58 H47"/>
+        <path d="M1155 80 V58 H1133"/>
+
+        <path d="M25 480 V502 H47"/>
+        <path d="M1155 480 V502 H1133"/>
 
     </g>
 
@@ -1143,13 +1114,13 @@
         width="1156"
         height="2"
         fill="#00f0ff"
-        opacity="0.035"
+        opacity=".035"
     >
 
         <animate
             attributeName="y"
             values="0;560;0"
-            dur="12s"
+            dur="11s"
             repeatCount="indefinite"
         />
 
@@ -1171,7 +1142,7 @@
 
         <animate
             attributeName="opacity"
-            values="0;0;0.018;0;0.008;0;0"
+            values="0;0;.018;0;.008;0;0"
             dur="8s"
             repeatCount="indefinite"
         />
@@ -1180,36 +1151,35 @@
 
 
     <!-- =========================================================
-         BOTTOM TERMINAL STATUS
+         FOOTER DECORATION
          ========================================================= -->
 
-    <g
-        opacity="0.35"
-        font-size="8"
-        fill="#526575"
-    >
+    <g opacity=".3">
 
-        <text x="25" y="540">
-            MATRIX_CHANNEL: ACTIVE
-        </text>
+        <rect
+            x="1020"
+            y="535"
+            width="4"
+            height="1"
+            fill="#00f0ff"
+        />
 
-        <text
-            x="590"
-            y="540"
-            text-anchor="middle"
-        >
-            HOLOGRAPHIC_INTERFACE
-        </text>
+        <rect
+            x="1030"
+            y="535"
+            width="18"
+            height="1"
+            fill="#00f0ff"
+        />
 
-        <text
-            x="1155"
-            y="540"
-            text-anchor="end"
-        >
-            CONNECTION_STABLE
-        </text>
+        <rect
+            x="1054"
+            y="535"
+            width="5"
+            height="1"
+            fill="#00f0ff"
+        />
 
     </g>
-
 
 </svg>
