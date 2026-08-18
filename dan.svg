@@ -1,9 +1,170 @@
-<div align="center">
-  <a href="https://github.com/dan007-png">
-    <img
-      src="https://raw.githubusercontent.com/dan007-png/dan007-png/main/dan.svg"
-      alt="Profile Grid"
-      style="width:100%; max-width:1200px; height:auto;"
-    />
-  </a>
-</div>
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1180" height="530" viewBox="0 0 1180 530" font-size="15px">
+<style>
+@font-face {
+  src: local('Consolas'), local('Consolas Bold');
+  font-family: 'ConsolasFallback';
+  font-display: swap;
+  -webkit-size-adjust: 109%;
+  size-adjust: 109%;
+}
+.key      { fill: #5EEAD4; }   
+.value    { fill: #E5E7EB; }   
+.cc       { fill: #5f6b7a; }   
+text, tspan { white-space: pre; }
+
+/* Animações Matrix e Glitch */
+@keyframes matrixRain {
+  0% { opacity: 0.1; transform: translateY(-10px); }
+  50% { opacity: 0.35; }
+  100% { opacity: 0.1; transform: translateY(10px); }
+}
+.matrix-bg {
+  animation: matrixRain 3s ease-in-out infinite;
+}
+
+/* Animação de troca de caracteres dinâmica no estilo Matrix */
+@keyframes charCycle {
+  0%   { opacity: 0.9; fill: #39ff14; }
+  20%  { opacity: 0.6; fill: #00f0ff; }
+  40%  { opacity: 1;   fill: #ffffff; text-shadow: 0 0 8px #39ff14; }
+  60%  { opacity: 0.4; fill: #008f11; }
+  80%  { opacity: 0.8; fill: #39ff14; }
+  100% { opacity: 0.9; fill: #39ff14; }
+}
+
+.matrix-art {
+  animation: charCycle 2s steps(4) infinite;
+}
+</style>
+
+<defs>
+    <filter id="matrixGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="1.5" result="blur"/>
+        <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+    <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00f0ff" />
+        <stop offset="100%" stop-color="#39ff14" />
+    </linearGradient>
+</defs>
+
+<!-- Fundo com tema Cyber/Matrix -->
+<rect width="1180" height="530" fill="#050805" rx="15" stroke="rgba(57, 255, 20, 0.3)" stroke-width="2"/>
+
+<!-- Linhas de código de fundo -->
+<g class="matrix-bg" fill="#39ff14" opacity="0.15" font-size="12px">
+    <text x="40" y="40">01000100 01100001</text>
+    <text x="320" y="120">SYSTEM_DECRYPTING...</text>
+    <text x="120" y="380">&lt;/DANIEL_LUCENA&gt;</text>
+    <text x="380" y="480">11010011 010101</text>
+</g>
+
+<!-- Desenho ASCII com Efeito Animado Estilo Matrix -->
+<g transform="translate(22,20) scale(0.42,0.88)">
+<text x="0" y="0" class="matrix-art">
+<tspan x="-10" y="-30">                         .:   .::::.                                             </tspan>
+<tspan x="-10" y="-21">                          .   .       .   ...-                                  </tspan>
+<tspan x="-10" y="-12">:. .::            .:                                                        </tspan>
+<tspan x="-10" y="-3"> :  -                                                                       </tspan>
+<tspan x="-10" y="6">:.::..       .                                                              </tspan>
+<tspan x="-10" y="15"> -.:. :      ..                                                             </tspan>
+<tspan x="-10" y="24">--...:.   .          .. ..:...                                              </tspan>
+<tspan x="-10" y="33"> -=.-----:.-::.. .::-+==+***+====---.                                       </tspan>
+<tspan x="-10" y="42">--:-# +**##%####+*+*%%%%%%%%#**+=====:                                      </tspan>
+<tspan x="-10" y="51">==-%%*%@@@@@@%@@@@@@@@%%%%%%##*+==-=--:                                     </tspan>
+<tspan x="-10" y="60">:--%@@%@@@@@@@@@@@@@@@@%%%%%%##*+==-----:                                   </tspan>
+<tspan x="-10" y="69">.=#@@@@@@@@@@@@@@@@@@@@%%%%%%##*+=-------                                   </tspan>
+<tspan x="-10" y="78">.+@@@@@@@@@@@@@@@@@@@@%%%%%%%##*+=-------:                                  </tspan>
+<tspan x="-10" y="87">.:+@@@@@@@@@@@@@@@@@@@@%%%%%%###*+==-=----:.                                </tspan>
+<tspan x="-10" y="96">.-*%@@@@@@@@@@@@@@@@@@@@%%%%%%##*+====----:.                                </tspan>
+<tspan x="-10" y="105">:+#%@@@@@@@@@@@@@@@@@@@@@@@@%%##*++==--:::-:                                </tspan>
+<tspan x="-10" y="114">-+#%@@@@@@@@@@@@@@@@@@@@@@@%%###*+++=-::::-:.                               </tspan>
+<tspan x="-10" y="123">:=*%@@@@@@@@@@@@@@@@@@@@@@%%%%##****+=-:::--:                               </tspan>
+<tspan x="-10" y="132"> -+%@@@@@@@@%*#*#%@@@@@%%%##=:     :.:-::--:                                </tspan>
+<tspan x="-10" y="141"> -*@@@@*+=.    -=#%%%%%##*+=.     .:..  .---:                                </tspan>
+<tspan x="-10" y="150"> =*@@%*#%%#*+-..:-*#%@%%*=:     :: ..:..:--.                                </tspan>
+<tspan x="-10" y="159"> +*%@%%#*=: :    .-*@@@%*:     +=      ..:--.                                </tspan>
+<tspan x="-10" y="168">  #%@@%*-:%-   -.+%%@@@@#:    .#+  ..    .--:   .-                            </tspan>
+<tspan x="-10" y="177">%@@%#%@@%#####*+--=*%%@@@@#:.  .:---........:-- :... .                      </tspan>
+<tspan x="-10" y="186">:-%@@%@@@@@%%###***#@@@@@%#::.---=====----:.:--....:                        </tspan>
+<tspan x="-10" y="195">+%@@@@@@@@@@@@@%%@@@@@@@@@#=::-=+*+++*+++=-::--..:.:.                       </tspan>
+<tspan x="-10" y="204">*@@@#@@@@@@@@@@@@@@@@@@@@%%#=:-=+****+=++=-:---:  .: .                      </tspan>
+<tspan x="-10" y="213">@%@%*@@@@@@@@@@@@@@@@@@@@@#*=-.:==+*+++=---:-=--   :.                       </tspan>
+<tspan x="-10" y="222"> %@##@@@@@@@@@@@@@@@@@@@%#*----.:=++++=--::--=.-   :.                       </tspan>
+<tspan x="-10" y="231"> @%%#@%@@@@@@@@@@@@@%--#+=.  ::..-=++=--:-::-:   ...                        </tspan>
+<tspan x="-10" y="240">  %%@@+@@@@@@@@@@@@@*:##+:    ....-=++=-:::---  :-..                        </tspan>
+<tspan x="-10" y="249">   @@@+@@@@@@@@@@@@@%%+###*. ..:-=+=+==:-:--- ::::                        </tspan>
+<tspan x="-10" y="258">    @@%#@@@@@@@@@@@@%++==*=-  .:+====--::-:.  .                           </tspan>
+<tspan x="-10" y="267">       =%@@@@@@@@%#=--=-.++.    .-===---::..                                </tspan>
+<tspan x="-10" y="276">       :#%@@@@%****+**++#*-.:-: -  .:::::...                                </tspan>
+<tspan x="-10" y="285">       .+##@@@+-++#=-==:-..         ::.   .                                 </tspan>
+<tspan x="-10" y="294">        :**#@%**= .=*****++=-.    :: ..                                     </tspan>
+<tspan x="-10" y="303">         +*-*%**%@%#*****+=......:-::.                                      </tspan>
+<tspan x="-10" y="312">          +:-+%#@@@%%%*=-....:..:::::                                       </tspan>
+<tspan x="-10" y="321">           ::+%%%%%%##+=:..-.:.......      :                                </tspan>
+<tspan x="-10" y="330">            :##+*#%%%%%#+--==-:.::.        .:                                </tspan>
+<tspan x="-10" y="339">           #..---%%@@@@@@##**==-:.        ..:                                </tspan>
+<tspan x="-10" y="348">           %%.   +*%%#%%%##+==-..         ..::                               </tspan>
+<tspan x="-10" y="357">            @%.  :-:==+++=+--.          ....:                               </tspan>
+<tspan x="-10" y="366">            %%#=     ..:               . ...:                               </tspan>
+<tspan x="-10" y="375">            %%@@#                       .: .                                </tspan>
+<tspan x="-10" y="384">            %%@@@%-                    .  ..                                </tspan>
+<tspan x="-10" y="393">           +%@@@%@%%%%#-                                                    </tspan>
+<tspan x="-10" y="402">           ++%@@%@%%%%%%+=-:.                                               </tspan>
+<tspan x="-10" y="411">           + %%%@%%%%%%%#+=:.                                               </tspan>
+<tspan x="-10" y="420">           + :%%%%@%%%###*-..      .                                        </tspan>
+<tspan x="-10" y="429">          -*= -#%%%@%%%#*=::..    ...                                       </tspan>
+<tspan x="-10" y="438">          -##. -%%@%%%%##+*+--.  .::                                        </tspan>
+<tspan x="-10" y="447">          -##-  -%%%%%%%%#***=:  :-:.::                                     </tspan>
+<tspan x="-10" y="456">           +*=   :*%%%%%##*+=-  :--.+-.                                     </tspan>
+<tspan x="-10" y="465">           *+=+   .*####*++--:-:-=::::                                      </tspan>
+<tspan x="-10" y="474">           #+   -  .+****+++=--=-                                           </tspan>
+<tspan x="-10" y="483">           +    :=  .--=++++===      .                                      </tspan>
+<tspan x="-10" y="492">           =         ..::-==-        .                                      </tspan>
+<tspan x="-10" y="501">           +        :    .:-=+                                              </tspan>
+<tspan x="-10" y="510">           =      +=      -=+-                                              </tspan>
+<tspan x="-10" y="519">               .--+-      :=*    .     .                                    </tspan>
+<tspan x="-10" y="528">           -. -=+-+      .-**:+.     :=                                     </tspan>
+<tspan x="-10" y="537">           :..-+#:=  .    .+*:       -                                      </tspan>
+<tspan x="-10" y="546">           :+:=++* .      .+#      .-                                       </tspan>
+<tspan x="-10" y="555">           +=-+=.+:.   . ++      .=:                                        </tspan>
+<tspan x="-10" y="564">           *-=---=+.    #        +*                                         </tspan>
+<tspan x="-10" y="573">           *:-+:==+ .  -         .+                                         </tspan>
+<tspan x="-10" y="582">           *: +#+=-..:      ::=-.                                         </tspan>
+<tspan x="-10" y="591">           =-:-*+:=-        -+*#-                                           </tspan>
+<tspan x="-10" y="600">           : --+=:      --. -+*                                             </tspan>
+</text>
+</g>
+
+<!-- Painel de Informações Laterais -->
+<text x="500" y="30" fill="#E5E7EB" filter="url(#matrixGlow)">
+<tspan x="515" y="30" fill="#00f0ff" font-size="17px" font-weight="bold">Daniel Lucena</tspan> <tspan fill="#39ff14">⚡</tspan> ————————————————————————————————————
+<tspan x="515" y="65" class="cc">. </tspan><tspan class="key">Função</tspan><tspan class="cc"> ......... </tspan><tspan class="value">Software &amp; AI Developer</tspan>
+<tspan x="515" y="85" class="cc">. </tspan><tspan class="key">Idade</tspan><tspan class="cc"> .......... </tspan><tspan class="value">26</tspan>
+<tspan x="515" y="105" class="cc">. </tspan><tspan class="key">Status</tspan><tspan class="cc"> ......... </tspan><tspan class="value" fill="#39ff14">Decodificando o futuro...</tspan>
+<tspan x="515" y="125" class="cc">. </tspan><tspan class="key">IDE</tspan><tspan class="cc"> ............ </tspan><tspan class="value">VS Code, IntelliJ IDEA</tspan>
+
+<tspan x="515" y="155" fill="#00f0ff">- Tech Stack</tspan> ——————————————————————————————————————
+<tspan x="515" y="175" class="cc">. </tspan><tspan class="key">AI &amp; LLMs</tspan><tspan class="cc"> ...... </tspan><tspan class="value">LangChain, OpenAI API, Agents</tspan>
+<tspan x="515" y="195" class="cc">. </tspan><tspan class="key">Frontend</tspan><tspan class="cc"> ....... </tspan><tspan class="value">React, Next.js, Tailwind CSS</tspan>
+<tspan x="515" y="215" class="cc">. </tspan><tspan class="key">Backend</tspan><tspan class="cc"> ........ </tspan><tspan class="value">Java, Node.js, Express, MongoDB</tspan>
+<tspan x="515" y="235" class="cc">. </tspan><tspan class="key">DevOps/Cloud</tspan><tspan class="cc"> ... </tspan><tspan class="value">Docker, Git, AWS (Basic)</tspan>
+
+<tspan x="515" y="265" fill="#39ff14">- Contact</tspan> ————————————————————————————————————————
+<tspan x="515" y="285" class="cc">. </tspan><tspan class="key">E-mail</tspan><tspan class="cc"> ......... </tspan><tspan class="value">lutechdan@gmail.com</tspan>
+<tspan x="515" y="305" class="cc">. </tspan><tspan class="key">Telefone</tspan><tspan class="cc"> ....... </tspan><tspan class="value">(83) 9623-6337</tspan>
+</text>
+
+<!-- Feixe de luz horizontal cruzando o terminal -->
+<rect x="0" y="-10" width="1180" height="6" fill="url(#cyberGrad)" opacity="0.4" filter="url(#matrixGlow)">
+    <animate attributeName="y" from="-10" to="530" dur="5s" repeatCount="indefinite"/>
+</rect>
+
+</svg>
+
+```
