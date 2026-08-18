@@ -1,35 +1,392 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1180" height="530" viewBox="0 0 1180 530" fontsize="15px">
-<style>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1180"
+    height="560"
+    viewBox="0 0 1180 560"
+    font-family="Consolas, 'Courier New', monospace"
+>
+
+    <!-- =========================================================
+         DEFINITIONS
+         ========================================================= -->
+
+    <defs>
+
+        <!-- Main cyan hologram glow -->
+        <filter id="holoGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="1.8" result="blur1"/>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur2"/>
+
+            <feFlood flood-color="#00f0ff" flood-opacity="0.25" result="cyan"/>
+            <feComposite in="cyan" in2="blur2" operator="in" result="cyanGlow"/>
+
+            <feMerge>
+                <feMergeNode in="blur1"/>
+                <feMergeNode in="cyanGlow"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
 
 
-<defs>
-    <filter id="matrixGlow">
-        <feGaussianBlur stdDeviation="2" result="blur"/>
-        <feMerge>
-            <feMergeNode in="blur"/>
-            <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-    </filter>
-</defs>
+        <!-- Stronger hologram -->
+        <filter id="holoStrong" x="-40%" y="-40%" width="180%" height="180%">
 
-  
-@font-face {
-  src: local('Consolas'), local('Consolas Bold');
-  font-family: 'ConsolasFallback';
-  font-display: swap;
-  -webkit-size-adjust: 109%;
-  size-adjust: 109%;
-}
-.key      { fill: #5EEAD4; fill:#5EEAD4; animation:none; }   
-.value    { fill: #E5E7EB; }   
-.cc       { fill: #5f6b7a; }   
-.addColor { fill: #39ff14; }   
-.delColor { fill: #ef4444; }   
-text, tspan { white-space: pre; }
-</style>
-<rect width="1180px" height="530px" fill="#0a0b10" rx="15" stroke="rgba(0, 240, 255, 0.15)" stroke-width="2"/>
-<g transform="translate(22,20) scale(0.42,0.88)">
+            <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="2"
+                result="blur"
+            />
+
+            <feColorMatrix
+                in="blur"
+                type="matrix"
+                values="
+                    0 0 0 0 0
+                    0 0 0 0 0.9
+                    0 0 0 0 1
+                    0 0 0 1 0
+                "
+                result="cyanBlur"
+            />
+
+            <feMerge>
+                <feMergeNode in="cyanBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+
+        </filter>
+
+
+        <!-- Scanline mask -->
+        <linearGradient id="scanGradient" x1="0" y1="0" x2="0" y2="1">
+
+            <stop
+                offset="0%"
+                stop-color="#00f0ff"
+                stop-opacity="0"
+            />
+
+            <stop
+                offset="45%"
+                stop-color="#00f0ff"
+                stop-opacity="0.02"
+            />
+
+            <stop
+                offset="50%"
+                stop-color="#00f0ff"
+                stop-opacity="0.22"
+            />
+
+            <stop
+                offset="55%"
+                stop-color="#00f0ff"
+                stop-opacity="0.02"
+            />
+
+            <stop
+                offset="100%"
+                stop-color="#00f0ff"
+                stop-opacity="0"
+            />
+
+        </linearGradient>
+
+
+        <!-- Background gradient -->
+        <radialGradient id="backgroundGlow" cx="28%" cy="45%" r="70%">
+
+            <stop
+                offset="0%"
+                stop-color="#071b20"
+                stop-opacity="0.95"
+            />
+
+            <stop
+                offset="45%"
+                stop-color="#0a1017"
+                stop-opacity="0.9"
+            />
+
+            <stop
+                offset="100%"
+                stop-color="#05070b"
+                stop-opacity="1"
+            />
+
+        </radialGradient>
+
+
+        <!-- Border gradient -->
+        <linearGradient id="borderGradient" x1="0" y1="0" x2="1" y2="1">
+
+            <stop
+                offset="0%"
+                stop-color="#00f0ff"
+                stop-opacity="0.55"
+            />
+
+            <stop
+                offset="35%"
+                stop-color="#00f0ff"
+                stop-opacity="0.05"
+            />
+
+            <stop
+                offset="70%"
+                stop-color="#ff007f"
+                stop-opacity="0.08"
+            />
+
+            <stop
+                offset="100%"
+                stop-color="#00f0ff"
+                stop-opacity="0.35"
+            />
+
+        </linearGradient>
+
+
+        <!-- Horizontal interference -->
+        <pattern
+            id="scanlines"
+            width="100%"
+            height="6"
+            patternUnits="userSpaceOnUse"
+        >
+
+            <rect
+                width="100%"
+                height="1"
+                fill="#00f0ff"
+                opacity="0.025"
+            />
+
+        </pattern>
+
+
+        <!-- ASCII clipping area -->
+        <clipPath id="asciiClip">
+
+            <rect
+                x="22"
+                y="62"
+                width="465"
+                height="458"
+                rx="8"
+            />
+
+        </clipPath>
+
+
+        <!-- Small blur for particles -->
+        <filter id="particleGlow">
+
+            <feGaussianBlur
+                stdDeviation="1.5"
+                result="blur"
+            />
+
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+
+        </filter>
+
+
+        <!-- Text glow -->
+        <filter id="textGlow">
+
+            <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="1"
+                result="blur"
+            />
+
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+
+        </filter>
+
+
+        <!-- =====================================================
+             CSS
+             ===================================================== -->
+
+        <style>
+
+            .key {
+                fill: #5EEAD4;
+                font-weight: 600;
+            }
+
+            .value {
+                fill: #E5E7EB;
+            }
+
+            .muted {
+                fill: #64748B;
+            }
+
+            .cyan {
+                fill: #00F0FF;
+            }
+
+            .pink {
+                fill: #FF007F;
+            }
+
+            .green {
+                fill: #39FF14;
+            }
+
+            .ascii {
+                fill: #00F0FF;
+                font-size: 15px;
+                letter-spacing: 0px;
+            }
+
+            .skill {
+                fill: #CBD5E1;
+                font-size: 13px;
+            }
+
+            .skillCategory {
+                fill: #5EEAD4;
+                font-size: 13px;
+                font-weight: bold;
+            }
+
+            text,
+            tspan {
+                white-space: pre;
+            }
+
+        </style>
+
+    </defs>
+
+
+    <!-- =========================================================
+         BACKGROUND
+         ========================================================= -->
+
+    <rect
+        x="0"
+        y="0"
+        width="1180"
+        height="560"
+        rx="18"
+        fill="#05070B"
+    />
+
+    <rect
+        x="1"
+        y="1"
+        width="1178"
+        height="558"
+        rx="17"
+        fill="url(#backgroundGlow)"
+        stroke="url(#borderGradient)"
+        stroke-width="1.5"
+    />
+
+
+    <!-- Subtle inner border -->
+
+    <rect
+        x="9"
+        y="9"
+        width="1162"
+        height="542"
+        rx="13"
+        fill="none"
+        stroke="#00F0FF"
+        stroke-width="1"
+        opacity="0.035"
+    />
+
+
+    <!-- =========================================================
+         TOP HUD LINE
+         ========================================================= -->
+
+    <g opacity="0.7">
+
+        <rect
+            x="22"
+            y="20"
+            width="6"
+            height="6"
+            fill="#39FF14"
+            rx="1"
+        >
+            <animate
+                attributeName="opacity"
+                values="1;0.3;1;0.7;1"
+                dur="2.2s"
+                repeatCount="indefinite"
+            />
+        </rect>
+
+        <text
+            x="36"
+            y="26"
+            fill="#475569"
+            font-size="10"
+            letter-spacing="2"
+        >
+            SYSTEM_PROFILE // ONLINE
+        </text>
+
+        <text
+            x="1150"
+            y="26"
+            text-anchor="end"
+            fill="#334155"
+            font-size="10"
+        >
+            0xD4N13L
+        </text>
+
+    </g>
+
+
+    <!-- =========================================================
+         ASCII PANEL
+         ========================================================= -->
+
+    <rect
+        x="18"
+        y="48"
+        width="480"
+        height="472"
+        rx="12"
+        fill="#02060A"
+        stroke="#00F0FF"
+        stroke-width="1"
+        opacity="0.65"
+    />
+
+    <!-- Inner cyan ambient -->
+
+    <rect
+        x="22"
+        y="52"
+        width="472"
+        height="464"
+        rx="9"
+        fill="none"
+        stroke="#00F0FF"
+        stroke-width="1"
+        opacity="0.04"
+    />
+
+
 <text x="0" y="0" fill="#00f0ff" class="ascii">
 <tspan x="-10" y="-30">                                                 .:  .::::.                                                             </tspan>
 <tspan x="-10" y="-21">                                                  .   .       .   ...-                                                         </tspan>
@@ -103,42 +460,672 @@ text, tspan { white-space: pre; }
 <tspan x="-10" y="591">                                                  =-:-*+:=-       -+*#-                                                        </tspan>
 <tspan x="-10" y="600">                                                  : --+=:      --. -+*                                                         </tspan>
 </text>
-</g>
-<text x="0" y="0" fill="#00f0ff" class="ascii">
-    <animate
-        attributeName="opacity"
-        values="1;0.85;0.98;0.7;1;0.93;1"
-        dur="3s"
-        repeatCount="indefinite"/>
-<tspan x="520" y="30" fill="#00f0ff" fontsize="17px">Daniel Lucena</tspan> -———————————————————————————————————————————-—-
-<tspan x="520" y="70" class="cc">. </tspan><tspan class="key">Função</tspan><tspan class="cc"> .......... </tspan><tspan class="value">Software &amp; developer</tspan>
-<tspan x="520" y="90" class="cc">. </tspan><tspan class="key">Idade</tspan><tspan class="cc" id="age_dots"> ......... </tspan><tspan class="value" id="age_data">26</tspan>
-<tspan x="520" y="110" class="cc">. </tspan><tspan class="key">Status</tspan><tspan class="cc"> ........... </tspan><tspan class="value">Fazendo • Lendo • Aprendendo</tspan>
-<tspan x="520" y="130" class="cc">. </tspan><tspan class="key">IDE</tspan><tspan class="cc"> ............. </tspan><tspan class="value">VS Code, Itellij</tspan>
-<tspan x="520" y="150" class="cc">. </tspan>
-<tspan x="520" y="190" class="cc">. </tspan><tspan class="key">AI</tspan>:<tspan class="cc"> ......................... </tspan><tspan class="value">LangChain, OpenAI, LLMs</tspan>
-<tspan x="520" y="210" class="cc">. </tspan><tspan class="key">Frontend</tspan>:<tspan class="cc"> ........ </tspan><tspan class="value">HTML/CSS, React, Next.js, Tailwind</tspan>
-<tspan x="520" y="230" class="cc">. </tspan><tspan class="key">Backend</tspan>:<tspan class="cc"> .. </tspan><tspan class="value">Java, Node.js, Express, MongoDB, Postgres</tspan>
-<tspan x="520" y="270" class="cc">. </tspan>
-<tspan x="520" y="290" fill="#ff007f">- Contact</tspan> -—————————————————————————————————————-—-
-<tspan x="520" y="310" class="cc">. </tspan><tspan class="key">E-mail</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">lutechdan@gmail.com</tspan>
-<tspan x="520" y="330" class="cc">. </tspan><tspan class="key">Telefone</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">(83)9623-6337</tspan>
-</text>
 
-<rect
-    x="0"
-    y="-15"
-    width="1180"
-    height="12"
-    fill="#39ff14"
-    opacity="0.08">
+    <g
+        id="ascii-art"
+        clip-path="url(#asciiClip)"
+        transform="translate(28 76)"
+        filter="url(#holoGlow)"
+    >
 
-    <animate
-        attributeName="y"
-        from="-15"
-        to="530"
-        dur="8s"
-        repeatCount="indefinite"/>
-</rect>
+        <!-- =====================================================
+             PLACEHOLDER
+             
+             Cole aqui seus <text> / <tspan> do ASCII.
+             
+             Exemplo:
+
+             <text class="ascii">
+                 <tspan x="0" y="0">...</tspan>
+                 <tspan x="0" y="15">...</tspan>
+             </text>
+
+             ===================================================== -->
+
+        <text
+            x="15"
+            y="210"
+            fill="#00F0FF"
+            opacity="0.12"
+            font-size="11"
+        >
+            &lt; INSERT ASCII ART HERE / HOLOGRAM NODE / &gt;
+        </text>
+
+    </g>
+
+
+    <!-- =========================================================
+         ASCII GHOST / RGB GLITCH
+         ========================================================= -->
+
+    <g
+        id="ascii-glitch"
+        clip-path="url(#asciiClip)"
+        transform="translate(28 76)"
+        opacity="0.05"
+    >
+
+        <g
+            transform="translate(2 0)"
+        >
+            <rect
+                x="40"
+                y="100"
+                width="300"
+                height="1"
+                fill="#FF007F"
+            />
+        </g>
+
+        <g
+            transform="translate(-2 0)"
+        >
+            <rect
+                x="90"
+                y="260"
+                width="220"
+                height="1"
+                fill="#00F0FF"
+            />
+        </g>
+
+        <animate
+            attributeName="opacity"
+            values="0;0;0.07;0;0.035;0"
+            dur="4.8s"
+            repeatCount="indefinite"
+        />
+
+    </g>
+
+
+    <!-- =========================================================
+         HOLOGRAM FLICKER
+         ========================================================= -->
+
+    <g
+        clip-path="url(#asciiClip)"
+        opacity="0.08"
+    >
+
+        <rect
+            x="22"
+            y="52"
+            width="472"
+            height="464"
+            fill="url(#scanlines)"
+        />
+
+    </g>
+
+
+    <!-- =========================================================
+         MOVING SCANLINE
+         ========================================================= -->
+
+    <rect
+        x="22"
+        y="52"
+        width="472"
+        height="55"
+        fill="url(#scanGradient)"
+        clip-path="url(#asciiClip)"
+    >
+
+        <animate
+            attributeName="y"
+            values="40;500;40"
+            dur="7s"
+            repeatCount="indefinite"
+        />
+
+    </rect>
+
+
+    <!-- =========================================================
+         HORIZONTAL GLITCH BARS
+         ========================================================= -->
+
+    <g
+        clip-path="url(#asciiClip)"
+        opacity="0.18"
+    >
+
+        <rect
+            x="22"
+            y="140"
+            width="0"
+            height="2"
+            fill="#00F0FF"
+        >
+
+            <animate
+                attributeName="width"
+                values="0;0;120;0;0"
+                dur="6s"
+                repeatCount="indefinite"
+            />
+
+            <animate
+                attributeName="x"
+                values="22;280;120;22"
+                dur="6s"
+                repeatCount="indefinite"
+            />
+
+        </rect>
+
+
+        <rect
+            x="22"
+            y="340"
+            width="0"
+            height="1"
+            fill="#FF007F"
+        >
+
+            <animate
+                attributeName="width"
+                values="0;180;0;90;0"
+                dur="5.3s"
+                repeatCount="indefinite"
+            />
+
+            <animate
+                attributeName="x"
+                values="22;160;310;70;22"
+                dur="5.3s"
+                repeatCount="indefinite"
+            />
+
+        </rect>
+
+    </g>
+
+
+    <!-- =========================================================
+         HOLOGRAM CORNER MARKERS
+         ========================================================= -->
+
+    <g
+        fill="none"
+        stroke="#00F0FF"
+        stroke-width="1"
+        opacity="0.45"
+    >
+
+        <path d="M25 80 V62 H43"/>
+        <path d="M475 80 V62 H457"/>
+
+        <path d="M25 488 V506 H43"/>
+        <path d="M475 488 V506 H457"/>
+
+    </g>
+
+
+    <!-- =========================================================
+         FLOATING PARTICLES
+         ========================================================= -->
+
+    <g
+        fill="#00F0FF"
+        filter="url(#particleGlow)"
+    >
+
+        <circle cx="40" cy="100" r="1" opacity="0.35">
+            <animate
+                attributeName="cy"
+                values="100;90;100"
+                dur="4s"
+                repeatCount="indefinite"
+            />
+        </circle>
+
+        <circle cx="460" cy="180" r="0.8" opacity="0.25">
+            <animate
+                attributeName="cy"
+                values="180;194;180"
+                dur="5s"
+                repeatCount="indefinite"
+            />
+        </circle>
+
+        <circle cx="55" cy="420" r="0.7" opacity="0.25">
+            <animate
+                attributeName="cx"
+                values="55;70;55"
+                dur="3.5s"
+                repeatCount="indefinite"
+            />
+        </circle>
+
+        <circle cx="445" cy="455" r="1" opacity="0.2">
+            <animate
+                attributeName="cy"
+                values="455;440;455"
+                dur="4.5s"
+                repeatCount="indefinite"
+            />
+        </circle>
+
+    </g>
+
+
+    <!-- =========================================================
+         VERTICAL DIVIDER
+         ========================================================= -->
+
+    <line
+        x1="520"
+        y1="48"
+        x2="520"
+        y2="520"
+        stroke="#00F0FF"
+        stroke-width="1"
+        opacity="0.07"
+    />
+
+
+    <!-- =========================================================
+         PROFILE HEADER
+         ========================================================= -->
+
+    <g>
+
+        <text
+            x="550"
+            y="82"
+            fill="#00F0FF"
+            font-size="22"
+            font-weight="bold"
+            filter="url(#textGlow)"
+        >
+            Daniel Lucena
+        </text>
+
+
+        <text
+            x="550"
+            y="105"
+            fill="#64748B"
+            font-size="11"
+            letter-spacing="2"
+        >
+            SOFTWARE ENGINEER // BUILDER
+        </text>
+
+
+        <circle
+            cx="1120"
+            cy="76"
+            r="4"
+            fill="#39FF14"
+        >
+
+            <animate
+                attributeName="opacity"
+                values="1;0.25;1"
+                dur="2s"
+                repeatCount="indefinite"
+            />
+
+        </circle>
+
+
+        <text
+            x="1135"
+            y="80"
+            text-anchor="end"
+            fill="#475569"
+            font-size="10"
+        >
+            ACTIVE
+        </text>
+
+    </g>
+
+
+    <!-- =========================================================
+         PROFILE DATA
+         ========================================================= -->
+
+    <g font-size="13">
+
+        <text x="550" y="140">
+
+            <tspan class="muted">. </tspan>
+            <tspan class="key">Função</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="value">Software &amp; Developer</tspan>
+
+        </text>
+
+
+        <text x="550" y="162">
+
+            <tspan class="muted">. </tspan>
+            <tspan class="key">Idade</tspan>
+            <tspan class="muted"> .......... </tspan>
+            <tspan class="value">26</tspan>
+
+        </text>
+
+
+        <text x="550" y="184">
+
+            <tspan class="muted">. </tspan>
+            <tspan class="key">Status</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="value">Fazendo • Lendo • Aprendendo</tspan>
+
+        </text>
+
+
+        <text x="550" y="206">
+
+            <tspan class="muted">. </tspan>
+            <tspan class="key">IDE</tspan>
+            <tspan class="muted"> ........... </tspan>
+            <tspan class="value">VS Code • IntelliJ</tspan>
+
+        </text>
+
+    </g>
+
+
+    <!-- =========================================================
+         STACK HEADER
+         ========================================================= -->
+
+    <line
+        x1="550"
+        y1="230"
+        x2="1145"
+        y2="230"
+        stroke="#00F0FF"
+        stroke-width="1"
+        opacity="0.08"
+    />
+
+
+    <text
+        x="550"
+        y="256"
+        fill="#FF007F"
+        font-size="13"
+        font-weight="bold"
+        letter-spacing="1"
+    >
+        // TECH STACK
+    </text>
+
+
+    <!-- =========================================================
+         SKILLS
+         ========================================================= -->
+
+    <g font-size="12">
+
+        <!-- AI -->
+
+        <text x="550" y="282">
+
+            <tspan class="skillCategory">AI</tspan>
+            <tspan class="muted"> .............. </tspan>
+            <tspan class="skill">
+                LangChain • OpenAI • LLMs
+            </tspan>
+
+        </text>
+
+
+        <!-- Frontend -->
+
+        <text x="550" y="304">
+
+            <tspan class="skillCategory">Frontend</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="skill">
+                React • Next.js • Tailwind • HTML/CSS
+            </tspan>
+
+        </text>
+
+
+        <!-- Backend -->
+
+        <text x="550" y="326">
+
+            <tspan class="skillCategory">Backend</tspan>
+            <tspan class="muted"> .......... </tspan>
+            <tspan class="skill">
+                Java • Node.js • Express
+            </tspan>
+
+        </text>
+
+
+        <!-- Database -->
+
+        <text x="550" y="348">
+
+            <tspan class="skillCategory">Database</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="skill">
+                PostgreSQL • MongoDB
+            </tspan>
+
+        </text>
+
+
+        <!-- Architecture -->
+
+        <text x="550" y="370">
+
+            <tspan class="skillCategory">Architecture</tspan>
+            <tspan class="muted"> .... </tspan>
+            <tspan class="skill">
+                APIs • REST • Modular Systems
+            </tspan>
+
+        </text>
+
+
+        <!-- Languages -->
+
+        <text x="550" y="392">
+
+            <tspan class="skillCategory">Languages</tspan>
+            <tspan class="muted"> ....... </tspan>
+            <tspan class="skill">
+                Java • JavaScript • TypeScript
+            </tspan>
+
+        </text>
+
+
+        <!-- Tools -->
+
+        <text x="550" y="414">
+
+            <tspan class="skillCategory">Workflow</tspan>
+            <tspan class="muted"> ........ </tspan>
+            <tspan class="skill">
+                Git • VS Code • IntelliJ
+            </tspan>
+
+        </text>
+
+    </g>
+
+
+    <!-- =========================================================
+         SKILL STATUS BAR
+         ========================================================= -->
+
+    <g>
+
+        <text
+            x="550"
+            y="448"
+            fill="#475569"
+            font-size="9"
+            letter-spacing="1.5"
+        >
+            SYSTEM CAPABILITIES
+        </text>
+
+
+        <rect
+            x="550"
+            y="457"
+            width="595"
+            height="3"
+            rx="2"
+            fill="#111827"
+        />
+
+
+        <rect
+            x="550"
+            y="457"
+            width="470"
+            height="3"
+            rx="2"
+            fill="#00F0FF"
+            opacity="0.55"
+        >
+
+            <animate
+                attributeName="opacity"
+                values="0.35;0.7;0.45;0.6;0.35"
+                dur="3.5s"
+                repeatCount="indefinite"
+            />
+
+        </rect>
+
+    </g>
+
+
+    <!-- =========================================================
+         CONTACT
+         ========================================================= -->
+
+    <line
+        x1="550"
+        y1="480"
+        x2="1145"
+        y2="480"
+        stroke="#00F0FF"
+        stroke-width="1"
+        opacity="0.08"
+    />
+
+
+    <text
+        x="550"
+        y="505"
+        fill="#FF007F"
+        font-size="12"
+        font-weight="bold"
+        letter-spacing="1"
+    >
+        // CONTACT
+    </text>
+
+
+    <text
+        x="550"
+        y="525"
+        font-size="11"
+    >
+
+        <tspan class="key">E-mail</tspan>
+        <tspan class="muted"> ............ </tspan>
+        <tspan class="value">lutechdan@gmail.com</tspan>
+
+    </text>
+
+
+    <text
+        x="850"
+        y="525"
+        font-size="11"
+    >
+
+        <tspan class="key">Phone</tspan>
+        <tspan class="muted"> ....... </tspan>
+        <tspan class="value">(83) 9623-6337</tspan>
+
+    </text>
+
+
+    <!-- =========================================================
+         GLOBAL SCAN
+         ========================================================= -->
+
+    <rect
+        x="12"
+        y="0"
+        width="1156"
+        height="2"
+        fill="#00F0FF"
+        opacity="0.035"
+    >
+
+        <animate
+            attributeName="y"
+            values="0;560;0"
+            dur="11s"
+            repeatCount="indefinite"
+        />
+
+    </rect>
+
+
+    <!-- =========================================================
+         GLOBAL MICRO FLICKER
+         ========================================================= -->
+
+    <g
+        opacity="0"
+    >
+
+        <rect
+            x="0"
+            y="0"
+            width="1180"
+            height="560"
+            fill="#00F0FF"
+            opacity="0.015"
+        />
+
+        <animate
+            attributeName="opacity"
+            values="0;0;0.025;0;0.01;0;0"
+            dur="8s"
+            repeatCount="indefinite"
+        />
+
+    </g>
+
+
+    <!-- =========================================================
+         CORNER DECORATION
+         ========================================================= -->
+
+    <g
+        fill="#00F0FF"
+        opacity="0.25"
+    >
+
+        <rect x="1100" y="535" width="4" height="1"/>
+        <rect x="1110" y="535" width="18" height="1"/>
+        <rect x="1134" y="535" width="5" height="1"/>
+
+    </g>
+
 
 </svg>
